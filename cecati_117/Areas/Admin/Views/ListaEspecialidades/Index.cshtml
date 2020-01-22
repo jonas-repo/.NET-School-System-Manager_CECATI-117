@@ -1,0 +1,92 @@
+﻿@model IEnumerable<cecati_117.Models.ListaEspecialidades>
+
+@{
+    ViewBag.Title = "Lista de especialidades";
+}
+
+<div class="page-title">
+    <div class="title_left">
+  
+    </div>
+</div>
+<div class="clearfix"></div>
+<div class="row">
+    <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Paginas de especialidades</h2>
+                <ul class="nav navbar-right panel_toolbox">
+                    <li>
+                        <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <br />
+                <a href="@Url.Action("Create", "ListaEspecialidades")" class="btn btn-success">Agregar una especialidad</a>
+                <br />
+
+                <table class="table table-hover table-bordered dt-responsive nowrap myTable" style="width:100%" >
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.ListaEspecialidades_especialidad)
+                            </th>
+                            <th>
+                                Páginas asociadas a esta especialidad
+                            </th>
+                            <th>Opciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    <label> @Html.DisplayFor(modelItem => item.ListaEspecialidades_especialidad)</label>
+                                </td>
+                                <td>
+                                    <ul>
+                                        @foreach (var pagina in item.EspecialidadDetalles)
+                                        {
+                                            <li>
+                                                <h4>
+                                                    <a href="@Url.Action("Edit", "EspecialidadDetalles", new { id = pagina.EspecialidadDetalles_ID } )">
+                                                        @pagina.EspecialidadDetalles_titulo
+                                                    </a>
+                                                    <a class="btn-sm btn-danger" onclick="return confirm('¿Desea eliminar este registro?');" href="@Url.Action("DeleteConfirmed", "EspecialidadDetalles", new { id = pagina.EspecialidadDetalles_ID } )">Eliminar</a>
+                                                </h4>
+
+                                            </li>
+
+                                        }
+                                    </ul>
+                                    <div class="ln_solid"></div>
+                                    <a href="@Url.Action("Create", "EspecialidadDetalles", new { id = item.ListaEspecialidades_ID})" class="btn btn-primary">Agregar nueva página</a>
+                                </td>
+                                <td>
+                                    <a href="@Url.Action("Edit","ListaEspecialidades", new { id = item.ListaEspecialidades_ID})" class="btn btn-info">Editar</a>
+                                    <a onclick="return confirm('¿Desea eliminar este registro?');" href="@Url.Action("DeleteConfirmed","ListaEspecialidades", new { id = item.ListaEspecialidades_ID})" class="btn btn-danger">Eliminar</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>                 
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+

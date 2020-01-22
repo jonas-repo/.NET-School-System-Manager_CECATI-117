@@ -1,0 +1,142 @@
+﻿@model cecati_117.Models.Servicios
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<div class="page-title">
+    <div class="title_left">
+        <h3>Servicios</h3>
+    </div>
+</div>
+<div class="clearfix"></div>
+<div class="row">
+    <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Editar Servicio </h2>
+                <ul class="nav navbar-right panel_toolbox">
+                    <li>
+                        <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+
+
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(model => model.Servicios_ID)
+
+                    <div class="form-group">
+                        <br />
+                        <br />
+                        @Html.LabelFor(model => model.Servicios_titulo, htmlAttributes: new { @class = "control-label col-md-2 col-lg-2 col-sm-12 col-xs-12" })
+                        <div class="col-md-10 col-lg-10 col-sm-12 col-xs-12">
+                            @Html.EditorFor(model => model.Servicios_titulo, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Servicios_titulo, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <br />
+                        <br />
+                        @Html.LabelFor(model => model.Servicios_descripcion, htmlAttributes: new { @class = "control-label col-md-2 col-lg-2 col-sm-12 col-xs-12" })
+                        <div class="col-md-10 col-lg-10 col-sm-12 col-xs-12">
+                            <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+                                <div id="alerts"></div>
+                                <div class="btn-toolbar editor" data-role="editor-toolbar" data-target="#editor-one">
+                                    <div class="btn-group">
+                                        <a class="btn dropdown-toggle" data-toggle="dropdown" title="Font Size"><i class="fa fa-text-height"></i>&nbsp;<b class="caret"></b></a>
+                                        <ul class="dropdown-menu">
+                                            <li>
+                                                <a data-edit="fontSize 5">
+                                                    <p style="font-size:17px">Grande</p>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a data-edit="fontSize 3">
+                                                    <p style="font-size:14px">Normal</p>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a data-edit="fontSize 1">
+                                                    <p style="font-size:11px">Pequeña</p>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="btn-group">
+                                        <a class="btn" data-edit="bold" title="Negrita (Ctrl/Cmd+B)"><i class="fa fa-bold"></i></a>
+                                        <a class="btn" data-edit="italic" title="Italica (Ctrl/Cmd+I)"><i class="fa fa-italic"></i></a>
+                                        <a class="btn" data-edit="strikethrough" title="Rayada"><i class="fa fa-strikethrough"></i></a>
+                                        <a class="btn" data-edit="underline" title="Subrayada (Ctrl/Cmd+U)"><i class="fa fa-underline"></i></a>
+                                    </div>
+                                    <div class="btn-group">
+                                        <a class="btn" data-edit="insertunorderedlist" title="Lista"><i class="fa fa-list-ul"></i></a>
+                                        <a class="btn" data-edit="insertorderedlist" title="Lista numerada"><i class="fa fa-list-ol"></i></a>
+                                    </div>
+                                    <div class="btn-group">
+                                        <a class="btn" data-edit="justifyleft" title="Alinear Izquierda (Ctrl/Cmd+L)"><i class="fa fa-align-left"></i></a>
+                                        <a class="btn" data-edit="justifycenter" title="Centrar (Ctrl/Cmd+E)"><i class="fa fa-align-center"></i></a>
+                                        <a class="btn" data-edit="justifyright" title="Alinear Derecha (Ctrl/Cmd+R)"><i class="fa fa-align-right"></i></a>
+                                        <a class="btn" data-edit="justifyfull" title="Justificar (Ctrl/Cmd+J)"><i class="fa fa-align-justify"></i></a>
+                                    </div>
+                                    <div class="btn-group">
+                                        <a class="btn dropdown-toggle" data-toggle="dropdown" title="Hipervinculo"><i class="fa fa-link"></i></a>
+                                        <div class="dropdown-menu input-append">
+                                            <input class="span2" placeholder="URL de la pagina" type="text" data-edit="createLink" />
+                                            <button class="btn" type="button">Agregar</button>
+                                        </div>
+                                        <a class="btn" data-edit="unlink" title="Quitar Hipervinculo"><i class="fa fa-cut"></i></a>
+                                    </div>
+                                    <div class="btn-group">
+                                        <a class="btn" data-edit="undo" title="Deshacer (Ctrl/Cmd+Z)"><i class="fa fa-undo"></i></a>
+                                        <a class="btn" data-edit="redo" title="Rehacer (Ctrl/Cmd+Y)"><i class="fa fa-repeat"></i></a>
+                                    </div>
+                                </div>
+                                <div id="editor-one" class="editor-wrapper" onchange="GetDiv()">
+                                    @Html.Raw(Model.Servicios_descripcion)
+                                </div>
+                                <textarea name="__descr" id="descr" style="display:none;"></textarea>
+                                <br />
+                                <div class="ln_solid"></div>
+                            </div>
+                            @Html.ValidationMessageFor(model => model.Servicios_descripcion, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <br />
+                        <br />
+
+                        <div class="col-md-offset-2 col-lg-offset-2 col-md-10 col-lg-10 col-sm-12 col-xs-12">
+                            <input type="submit" value="Guardar" class="btn btn-warning" />
+                            <a href="@Url.Action("Index","Servicios")" class="btn btn-default">Cancelar</a>
+                        </div>
+                    </div>
+
+                }
+
+
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script>
+    //********************************para obtener el codigo html que nos manda el modelo en cuanto inicia la pagina
+    $(document).ready(function () {
+        var s = $('#editor-one').html()
+        $('#descr').val(s);
+    })
+    //********************************************************para obtener todo el codigo html del div del editor de texto
+    function GetDiv() {
+        var s = $('#editor-one').html()
+        $('#descr').val(s);
+    }
+</script>

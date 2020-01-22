@@ -1,0 +1,136 @@
+﻿@model PagedList.IPagedList<cecati_117.Models.Fotos_galeria>
+@using PagedList.Mvc
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+@{
+    ViewBag.Title = "Galería de imagenes ";
+    cecati_117.Models.Galeria galeria = ViewBag.galeria;
+}
+
+<style type="text/css">
+    .elem, .elem * {
+        box-sizing: border-box;
+        margin: 0 !important;
+    }
+
+    .elem {
+        display: inline-block;
+        font-size: 0;
+        width: 100%;
+        border: 20px solid transparent;
+        border-bottom: none;
+        background: #fff;
+        padding: 10px;
+        height: auto;
+        background-clip: padding-box;
+    }
+
+        .elem > span {
+            display: block;
+            cursor: pointer;
+            width: 100%;
+            padding-bottom: 70%;
+            background-size: cover;
+            background-position: center center;
+        }
+</style>
+
+
+<style type="text/css">
+    .lcl_fade_oc.lcl_pre_show #lcl_overlay,
+    .lcl_fade_oc.lcl_pre_show #lcl_window,
+    .lcl_fade_oc.lcl_is_closing #lcl_overlay,
+    .lcl_fade_oc.lcl_is_closing #lcl_window {
+        opacity: 0 !important;
+    }
+
+    .lcl_fade_oc.lcl_is_closing #lcl_overlay {
+        -webkit-transition-delay: .15s !important;
+        transition-delay: .15s !important;
+    }
+</style>
+
+<!-- //////////////////////////////////////////////// -->
+<!-- REQUIRED ELEMENTS -->
+<link href="~/assets/plugins/gallery/css/lc_lightbox.min.css" rel="stylesheet" />
+<script src="~/assets/plugins/gallery/lib/jquery.js"></script>
+<script src="~/assets/plugins/gallery/js/lc_lightbox.lite.min.js"></script>
+
+<!-- SKINS -->
+<link href="~/assets/plugins/gallery/skins/minimal.css" rel="stylesheet" />
+<!-- ASSETS -->
+<script src="~/assets/plugins/gallery/lib/AlloyFinger/alloy_finger.min.js"></script>
+<!-- Content Start -->
+<div id="main">
+
+    <!-- Title, Breadcrumb Start-->
+    <div class="breadcrumb-wrapper">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-xs-12 col-sm-6">
+                    <h2 class="title">Galería</h2>
+                </div>
+                <div class="col-lg-6 col-md-6 col-xs-12 col-sm-6">
+                    <div class="breadcrumbs pull-right">
+                        <ul>
+                            <li>Estas aquí:</li>
+                            <li><a href="@Url.Action("Index","Home")">Inicio</a></li>
+                            <li>Galería @galeria.Galeria_titulo</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Title, Breadcrumb End-->
+    <!-- Main Content start-->
+    <div class="content">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3 class="title">Nuestra galería de @galeria.Galeria_titulo</h3>
+                    @foreach (var imagen in Model)
+                    {
+                        <div class="col-lg-4 col-md-4 col-xs-12 col-sm-12" style="">
+                            <a class="elem" href="@imagen.Fotos_galeria_imagenURL" title="@imagen.Fotos_galeria_titulo" data-lcl-txt="@galeria.Galeria_titulo" data-lcl-author="@imagen.Fotos_galeria_autor" data-lcl-thumb="@imagen.Fotos_galeria_imagenURL">
+                                <span style="background-image: url('@imagen.Fotos_galeria_imagenURL')"></span>
+                            </a>
+                        </div>
+
+                    }
+
+                    <br />
+                    <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
+                        Pagina @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) de @Model.PageCount
+                        @Html.PagedListPager(Model, page => Url.Action("Index", new { id = galeria.Galeria_ID, page }))
+                    </div>
+                    <br /><br />                   
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="divider"></div>
+    <!-- Main Content end-->
+</div>
+
+<!-- //////////////////////////////////////////////// -->
+<!-- LIGHTBOX INITIALIZATION -->
+<script type="text/javascript">
+    $(document).ready(function (e) {
+
+        // live handler
+        lc_lightbox('.elem', {
+            wrap_class: 'lcl_fade_oc',
+            gallery: true,
+            thumb_attr: 'data-lcl-thumb',
+
+            skin: 'minimal',
+            radius: 0,
+            padding: 0,
+            border_w: 0,
+        });
+
+    });
+</script>
+<!-- //////////////////////////////////////////////// -->
+<!-- //////////////////////////////////////////////// -->

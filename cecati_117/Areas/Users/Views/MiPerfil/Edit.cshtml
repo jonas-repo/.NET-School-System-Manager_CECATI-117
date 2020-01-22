@@ -1,0 +1,165 @@
+﻿@model cecati_117.Models.Persona
+
+@{
+    ViewBag.Title = "Mi perfil";
+}
+
+<div class="row">
+    <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Editar mi perfil</h2>
+                <ul class="nav navbar-right panel_toolbox">
+                    <li>
+                        <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                @if (ViewBag.NoEsImagen != null)
+                {
+                    <div class="alert alert-danger" role="alert">
+                        @ViewBag.NoEsImagen
+                    </div>
+                }
+                @if (ViewBag.Success != null)
+                {
+                    <div class="alert alert-success" role="alert">
+                        @ViewBag.Success
+                    </div>
+                }
+                @using (Html.BeginForm("Edit", "MiPerfil", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-horizontal">
+
+
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        @Html.HiddenFor(model => model.Persona_id)
+                        @Html.HiddenFor(model => model.Email)
+                        @Html.HiddenFor(model => model.Id_usuario)
+                        @Html.HiddenFor(model => model.Rol)
+                        @Html.HiddenFor(model => model.Foto_perfil)
+                        @Html.HiddenFor(model => model.Numero_control)
+
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Foto_perfil, htmlAttributes: new { @class = "control-label col-md-2  col-sm-12 col-xs-12" })
+                            <div class="col-md-10">
+                                <div class="col-md-6 col-lg-6 col-sm-12 col-xs-12">
+                                    <div>
+                                        <div>
+                                            <div class="image view view-first">
+                                                @if (String.IsNullOrEmpty(Model.Foto_perfil))
+                                                {
+                                                    <img style="width:100%; height:100%; display: block;" src="~/img/fotos_perfil/profile.png" alt="@Model.Nombre" id="image_upload_preview" class="img-thumbnail img-responsive" />
+                                                }
+                                                else
+                                                {
+                                                    <img style="width:100%; height:100%; display: block;" src="@Html.DisplayTextFor(modelItem => modelItem.Foto_perfil)" alt="@Model.Nombre" id="image_upload_preview" class="img-thumbnail img-responsive" />
+                                                }
+
+                                            </div>
+                                            <div class="caption">
+                                                <input id="InputFile" type="file" class="form-control" name="imagen" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                @Html.ValidationMessageFor(model => model.Foto_perfil, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Nombre, htmlAttributes: new { @class = "control-label col-md-2  col-sm-12 col-xs-12" })
+                            <div class="col-md-8 col-lg-8 col-sm-12 col-xs-12">
+                                @Html.EditorFor(model => model.Nombre, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Apellido_paterno, htmlAttributes: new { @class = "control-label col-md-2  col-sm-12 col-xs-12" })
+                            <div class="col-md-8 col-lg-8 col-sm-12 col-xs-12">
+                                @Html.EditorFor(model => model.Apellido_paterno, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Apellido_paterno, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Apellido_materno, htmlAttributes: new { @class = "control-label col-md-2  col-sm-12 col-xs-12" })
+                            <div class="col-md-8 col-lg-8 col-sm-12 col-xs-12">
+                                @Html.EditorFor(model => model.Apellido_materno, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Apellido_materno, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Telefono, htmlAttributes: new { @class = "control-label col-md-2  col-sm-12 col-xs-12" })
+                            <div class="col-md-8 col-lg-8 col-sm-12 col-xs-12">
+                                <input type="number" class="form-control" name="Telefono" id="Telefono" value="@Model.Telefono" />
+                                @Html.ValidationMessageFor(model => model.Telefono, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group-sm">
+                            @Html.LabelFor(model => model.Genero, htmlAttributes: new { @class = "control-label col-md-2  col-sm-12 col-xs-12" })
+                            <div class="col-md-8 col-lg-8 col-sm-12 col-xs-12">
+
+                                @if (Model.Genero)
+                                {
+                                    <select id="Genero" name="Genero" class="form-control">
+                                        <option selected value="true">Masculino</option>
+                                        <option value="false">Femenino</option>
+                                    </select>
+                                }
+                                else
+                                {
+                                    <select id="Genero" name="Genero" class="form-control">
+                                        <option value="true">Masculino</option>
+                                        <option selected value="false">Femenino</option>
+                                    </select>
+                                }
+
+                                @Html.ValidationMessageFor(model => model.Genero, "", new { @class = "text-danger" })
+
+                            </div>
+                        </div>
+                        <br />
+                        <br />
+                        <hr />
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="submit" value="Guardar cambios" class="btn btn-success" />
+                            </div>
+                        </div>
+                    </div>
+                }
+
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script>
+    //*************************** para previsualizar una imagen antes de cargarla a la base de datos
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#image_upload_preview').attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    $("#InputFile").change(function () {
+        readURL(this);
+    });
+            //*******************************************************************************************************
+
+</script>

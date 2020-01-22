@@ -1,0 +1,9 @@
+﻿.tabla-responsive {
+    table-layout: fixed;
+}
+
+.contenedor-tabla-responsive {
+    overflow:auto;
+
+}
+

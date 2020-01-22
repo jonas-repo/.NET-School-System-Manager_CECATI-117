@@ -1,0 +1,164 @@
+﻿@model cecati_117.Models.RegisterViewModel
+@{
+    ViewBag.Title = "Editar usuario";
+    IEnumerable<cecati_117.Models.ListaEspecialidades> listaEspecialidades = ViewBag.Especialidad;
+    cecati_117.Models.ApplicationUser user = ViewBag.Usuario;
+    cecati_117.Models.Persona persona = ViewBag.Persona;
+
+}
+
+<div class="row">
+    <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Editar de cuenta de usuario</h2>
+                <ul class="nav navbar-right panel_toolbox">
+                    <li>
+                        <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <br />
+                @using (Html.BeginForm("EditarRegistro", "Cuentas", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <input type="text" value="@user.Id" name="user_id" hidden />
+                    <hr />
+                    @Html.ValidationSummary("", new { @class = "text-danger" })
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Email, new { @class = "col-md-2 col-lg-2 col-sm-12 col-xs-12 control-label" })
+                        <div class="col-md-10 col-lg-10 col-sm-12 col-xs-12">
+                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @Value = user.Email })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.FullName, new { @class = "col-md-2 col-lg-2 col-sm-12 col-xs-12 control-label" })
+                        <div class="col-md-10 col-lg-10 col-sm-12 col-xs-12">
+                            @Html.TextBoxFor(m => m.FullName, new { @class = "form-control", @Value = user.FullName })
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="form-group">
+                        <label class="control-label col-md-2 col-lg-2 col-sm-12 col-xs-12"></label>
+                        <div class="col-md-10 col-lg-10 col-sm-12 col-xs-12">
+                            <p>
+                                Si deseas cambiar la contraseña de esta cuenta ingresa las nuevas contraseñas de lo contrario puedes dejarlas en blanco
+                            </p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Password, new { @class = "col-md-2 col-lg-2 col-sm-12 col-xs-12 control-label" })
+                        <div class="col-md-10 col-lg-10 col-sm-12 col-xs-12">
+                            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 col-lg-2 col-sm-12 col-xs-12 control-label" })
+                        <div class="col-md-10 col-lg-10 col-sm-12 col-xs-12">
+                            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="form-group">
+                        <label class="col-md-2 col-lg-2 col-sm-12 col-xs-12 control-label">Rol de usuario</label>
+                        <div class="col-md-10 col-lg-10 col-sm-12 col-xs-12">
+                            @Html.DropDownList("RoleName", (IEnumerable<SelectListItem>)ViewBag.Roles, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <br />
+                    if (persona.Rol.Equals("Maestro"))
+                    {
+                        <div class="form-group" id="especialidad_tabla">
+                            <label class="col-md-2 col-lg-2 col-sm-12 col-xs-12 control-label">Especialidades a asignar</label>
+                            <div class="col-md-10 col-lg-10 col-sm-12 col-xs-12">
+                                <table class="table table-hover">
+                                    @foreach (var especialidad in listaEspecialidades)
+                                    {
+
+                                        if (persona != null)
+                                        {
+                                            if (persona.Especialidades.Where(x => x.Especialidad.ListaEspecialidades_ID == especialidad.ListaEspecialidades_ID).FirstOrDefault() != null)
+                                            {
+                                                <tr>
+                                                    <td>
+                                                        <input type="checkbox" name="especialidades_id" value="@especialidad.ListaEspecialidades_ID" class="flat" checked>
+                                                        @especialidad.ListaEspecialidades_especialidad
+                                                    </td>
+                                                </tr>
+                                            }
+                                            else
+                                            {
+                                                <tr>
+                                                    <td>
+                                                        <input type="checkbox" name="especialidades_id" value="@especialidad.ListaEspecialidades_ID" class="flat">
+                                                        @especialidad.ListaEspecialidades_especialidad
+                                                    </td>
+                                                </tr>
+                                            }
+
+
+                                        }
+                                        else
+                                        {
+                                            <tr>
+                                                <td>
+                                                    <input type="checkbox" name="especialidades_id" value="@especialidad.ListaEspecialidades_ID" class="flat">
+                                                    @especialidad.ListaEspecialidades_especialidad
+                                                </td>
+                                            </tr>
+                                        }
+
+                                    }
+                                </table>
+
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="form-group" id="especialidad_tabla" style="display:none;">
+                            <label class="col-md-2 col-lg-2 col-sm-12 col-xs-12 control-label">Especialidades a asignar</label>
+                            <div class="col-md-10 col-lg-10 col-sm-12 col-xs-12">
+                                <table class="table table-hover">
+                                    @foreach (var especialidad in listaEspecialidades)
+                                    {
+                                            <tr>
+                                                <td>
+                                                    <input type="checkbox" name="especialidades_id" value="@especialidad.ListaEspecialidades_ID" class="flat">
+                                                    @especialidad.ListaEspecialidades_especialidad
+                                                </td>
+                                            </tr>
+                                    }
+                                </table>
+                            </div>
+                        </div>
+                    }
+
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-lg-offset-2 col-md-10 col-lg-10 col-sm-12 col-xs-12">
+                            <input type="submit" class="btn btn-success" value="Guardar" />
+                            <a href="@Url.Action("Index","Cuentas")" class="btn btn-default">Cancelar</a>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script>
+    $('#RoleName').click(function () {
+        var e = document.getElementById("RoleName");
+        var strUser = e.options[e.selectedIndex].text;
+        console.log(strUser);
+        if (strUser === "Alumno" || strUser === "Maestro") {
+            document.getElementById("especialidad_tabla").style.display = "";
+        }
+        else {
+            document.getElementById("especialidad_tabla").style.display = "none";
+        }
+    });
+</script>
+

@@ -1,0 +1,130 @@
+﻿@model IEnumerable<cecati_117.Models.Noticias>
+
+@{
+    IEnumerable<cecati_117.Models.ProximosCursos> proximosCursos = ViewBag.proximosCursos;
+    IEnumerable<cecati_117.Models.BolsaDeTrabajo> bolsaDeTrabajo = ViewBag.bolsaTrabajo;
+    ViewBag.Title = "Panel de inicio";
+}
+<div class="page-title">
+    <div class="title_left">
+      
+    </div>
+</div>
+<div class="clearfix"></div>
+<div class="row">
+    <div class="col-md-10 col-lg-10 col-sm-12 col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h3>Pagina de inicio</h3>
+                <ul class="nav navbar-right panel_toolbox">
+                    <li>
+                        <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <br />
+                <div class="" role="tabpanel" data-example-id="togglable-tabs" style="font-size:medium;">
+                    <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
+                        <li role="presentation" class="active">
+                            <a href="#tab_content1" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true">Noticias recientes</a>
+                        </li>
+                        <li role="presentation" class="">
+                            <a href="#tab_content2" role="tab" id="profile-tab" data-toggle="tab" aria-expanded="false">Proximos cursos</a>
+                        </li>
+                        <li role="presentation" class="">
+                            <a href="#tab_content3" role="tab" id="profile-tab2" data-toggle="tab" aria-expanded="false">Bolsa de trabajo</a>
+                        </li>
+                    </ul>
+                    <div id="myTabContent" class="tab-content">
+                        <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="home-tab">
+                            @foreach (var noticia in Model)
+                            {
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 profile_details">
+                                    <div class="well profile_view">
+                                        <div class="col-sm-12">
+                                            @*<h4 class="brief"><i>Digital Strategist</i></h4>*@
+                                            <div class="left col-xs-7">
+                                                <h2> @noticia.Noticias_Titulo</h2>
+                                                <ul class="list-unstyled">
+                                                    <li><i class="fa fa-calendar"></i> Fecha: @noticia.Noticias_Fecha.ToString("dd/MM/yyyy")</li>
+                                                </ul>                                              
+                                            </div>
+                                            <div class="right col-xs-5 text-center">
+                                                <img src="@noticia.Noticias_ImagenURL" alt="" class="img-thumbnail img-responsive">
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12 bottom ">
+                                            <div class="col-xs-12 col-sm-6 emphasis">
+                                                <a href="/Noticias_slider/Noticias_Pagina/@noticia.Noticias_ID" target="_blank" class="btn btn-primary btn-sm">
+                                                    <i class="fa fa-"> </i> Ver noticia
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                        <div role="tabpanel" class="tab-pane fade" id="tab_content2" aria-labelledby="profile-tab">
+                            @foreach (var curso in proximosCursos)
+                            {
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 profile_details">
+                                    <div class="well profile_view">
+                                        <div class="col-sm-12">
+                                            @*<h4 class="brief"><i>Digital Strategist</i></h4>*@
+                                            <div class="left col-xs-7">
+                                                <h2> @curso.ProximosCursos_especialidad</h2>
+                                                <ul class="list-unstyled">
+                                                    <li><i class="fa fa-calendar"></i> Fecha: @curso.ProximosCursos_fecha.ToString("dd/MM/yyyy")</li>
+                                                </ul>
+                                            </div>
+                                            <div class="right col-xs-5 text-center">
+                                                <img src="@curso.ProximosCursos_ImagenURL" alt="" class="img-thumbnail img-responsive">
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12 bottom ">
+                                            <div class="col-xs-12 col-sm-6 emphasis">
+                                                <a href="@curso.ProximosCursos_ImagenURL" target="_blank" class="btn btn-primary btn-sm">
+                                                    <i class="fa fa-"> </i> Ver curso
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                        <div role="tabpanel" class="tab-pane fade" id="tab_content3" aria-labelledby="profile-tab">
+                            <ul class="list-unstyled timeline widget">
+
+                                @foreach (var trabajo in bolsaDeTrabajo)
+                                {
+                                    <li>
+                                        <div class="block">
+                                            <div class="block_content">
+                                                <h2 class="title">
+                                                    <a>@trabajo.BolsaDeTrabajo_Titulo</a>
+                                                </h2>                                               
+                                                <div class="byline">
+                                                    <p>  <i class="fa fa-calendar"></i> Fecha de publicación: <span>@trabajo.BolsaDeTrabajo_Fecha.ToString("dd/MM/yyyy")</span></p> 
+                                                </div>
+                                                <p class="excerpt">
+                                                    @Html.Raw(trabajo.BolsaDeTrabajo_Descripción)                                                   
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </li>
+                                }
+
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+               
+
+            </div>
+        </div>
+    </div>
+ 
+</div>

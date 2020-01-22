@@ -1,0 +1,60 @@
+﻿@model IEnumerable<cecati_117.Models.BolsaDeTrabajo>
+
+@{
+    ViewBag.Title = "Bolsa de trabajo";
+}
+
+
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Editar bolsa de trabajo</h2>
+                <ul class="nav navbar-right panel_toolbox">
+                    <li>
+                        <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <br />
+                <a href="@Url.Action("Create", "BolsaDeTrabajo")" class="btn btn-success">Agregar un trabajo</a>
+                <br />
+                <table class="table table-hover table-bordered dt-responsive nowrap myTable" style="width:100%" >
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.BolsaDeTrabajo_Titulo)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.BolsaDeTrabajo_Descripción)
+                            </th>
+                            <th>Opciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.BolsaDeTrabajo_Titulo)
+                                </td>
+                                <td>
+                                    @Html.Raw(item.BolsaDeTrabajo_Descripción)
+                                </td>
+                                <td>
+                                    <a href="@Url.Action("Edit","BolsaDeTrabajo", new { id = item.BolsaDeTrabajo_ID})" class="btn btn-info">Editar</a>
+                                    <a onclick="return confirm('¿Desea eliminar este registro?');" href="@Url.Action("DeleteConfirmed","BolsaDeTrabajo", new { id = item.BolsaDeTrabajo_ID})" class="btn btn-danger">Eliminar</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

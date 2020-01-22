@@ -1,0 +1,132 @@
+﻿
+@{
+    ViewBag.Title = "Agregar alumnos";
+
+    List<cecati_117.Models.Persona> personas = ViewBag.ListaNoEnGrupo;
+    cecati_117.Models.Grupo grupo = ViewBag.Grupo;
+}
+<div class="clearfix"></div>
+<div class="row">
+    <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Agregar alumno</h2>
+                <ul class="nav navbar-right panel_toolbox">
+                    <li>
+                        <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <br />
+                <h4>Alumnos registrados en grupo @grupo.Nombre_grupo</h4>
+                <br />
+                <table class="table table-hover table-bordered dt-responsive nowrap myTable" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>
+                                Numero de control
+                            </th>
+                            <th>
+                                Nombre
+                            </th>
+                            <th>
+                                Apellido Paterno
+                            </th>
+                            <th>
+                                Apellido Materno
+                            </th>
+                            <th>Opciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in grupo.Personas)
+                        {
+                            if (item.Rol == "Alumno")
+                            {
+                                <tr>
+                                    <td>
+                                        <label>@item.Numero_control</label>
+                                        
+                                    </td>
+                                    <td>
+                                        @item.Nombre
+                                    </td>
+                                    <td>
+                                        @item.Apellido_paterno
+                                    </td>
+                                    <td>
+                                        @item.Apellido_materno
+                                    </td>
+                                    <td>
+                                        <a onclick="return confirm('¿Desea eliminar al alumno de este grupo?');" href="@Url.Action("DeleteSelected","Grupo", new { Persona = item.Persona_id , grupo = grupo.Grupo_id})" class="btn btn-danger">Eliminar de este grupo</a>
+                                    </td>
+                                </tr>
+                            }
+
+                        }
+                    </tbody>
+                </table>
+                <hr />
+                <br />
+                <h4>Alumnos disponibles para el grupo @grupo.Nombre_grupo</h4>
+                <br />
+                @using (Html.BeginForm("AddSelected","Grupo", FormMethod.Post))
+                {
+
+                    <input type="submit" value="Registrar seleccionados" class="btn btn-success" />
+                    <br />
+                    <table class="table table-hover table-bordered dt-responsive nowrap myTable" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>Opciones</th>
+                                <th>
+                                    Numero de control
+                                </th>
+                                <th>
+                                    Nombre
+                                </th>
+                                <th>
+                                    Apellido Paterno
+                                </th>
+                                <th>
+                                    Apellido Materno
+                                </th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            @foreach (var persona in personas)
+                            {
+                                <tr>
+                                    <td>
+                                        <input type="checkbox" name="personasToGroup" value="@persona.Persona_id" class="flat">
+                                        <input type="hidden" value="@grupo.Grupo_id" name="grupo" />
+                                        Añadir al grupo
+                                    </td>
+                                    <td>
+                                        @persona.Numero_control
+                                    </td>
+                                    <td>
+                                        @persona.Nombre
+                                    </td>
+                                    <td>
+                                        @persona.Apellido_paterno
+                                    </td>
+                                    <td>
+                                        @persona.Apellido_materno
+                                    </td>
+
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

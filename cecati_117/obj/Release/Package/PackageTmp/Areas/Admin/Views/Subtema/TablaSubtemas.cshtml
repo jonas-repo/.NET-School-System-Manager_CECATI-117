@@ -1,0 +1,19 @@
+﻿@{ 
+    IEnumerable<cecati_117.Models.Subtema> subtemas = ViewBag.Subtemas;
+}
+
+
+        @foreach (var subtema in subtemas)
+        {
+           <tr>
+               <td>
+                   @subtema.Subtema_nombre
+               </td>
+               <td>
+                   <a href="@Url.Action("Edit","Subtema", new { id = subtema.Subtema_id })" class="btn btn-info">Editar</a>
+                   <a onclick="return confirm('¿Desea eliminar este registro?');" href="@Url.Action("DeleteConfirmed","Subtema", new { id = subtema.Subtema_id })" class="btn btn-danger">Eliminar</a>
+               </td>
+           </tr>
+
+        }
+

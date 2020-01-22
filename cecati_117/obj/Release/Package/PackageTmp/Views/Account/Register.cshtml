@@ -1,0 +1,115 @@
+﻿@model cecati_117.Models.RegisterViewModel
+@{
+    ViewBag.Title = "Registrarse como alumno - ";
+}
+<div class="row">
+    <div class="breadcrumb-wrapper">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-2 col-xs-12 col-sm-6" style="margin-top:2%;">
+                </div>
+                <div class="col-lg-6 col-md-6 col-xs-12 col-sm-6">
+                    <div class="breadcrumbs pull-right">
+                        <ul>
+                            <li>Estás aquí:</li>
+                            <li><a href="@Url.Action("Index","Home")">Inicio</a></li>
+                            <li>Registrarse</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="col-lg-6 col-md-6 col-sm-12  col-xs-12 col-md-offset-3 col-lg-offset-3 col-xs-offset-0  col-sm-offset-0">
+        <br />
+        @if (ViewBag.Error != null)
+        {
+            <div class="alert alert-info" role="alert">
+                @ViewBag.Error
+            </div>
+        }
+        @if (ViewBag.Success != null)
+        {
+            <div class="alert alert-success" role="alert">
+                @ViewBag.Success
+            </div>
+        }
+
+
+
+            <section id="loginForm" class="thumbnail">
+                @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <br />
+                    <h2 style="text-align:center;">Registrarse como alumno</h2>
+                    <hr />
+                    @Html.ValidationSummary("", new { @class = "text-danger" })
+
+                    <div class="input-group  col-md-8 col-lg-8 col-sm-12 col-xs-12 col-md-offset-2">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @Placeholder = "Correo electrónico", @Required = "true" })
+                    </div>
+                    <br />
+
+                    <div class="input-group col-md-8 col-lg-8 col-sm-12 col-xs-12 col-md-offset-2">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                        @Html.PasswordFor(m => m.Password, new { @class = "form-control", @Placeholder = "Contraseña", @Required = "true" })
+                    </div>
+                    <br />
+
+                    <div class=" input-group col-md-8 col-lg-8 col-sm-12 col-xs-12 col-md-offset-2">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                        @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", @Placeholder = "Confirmar contraseña", @Required = "true" })
+                    </div>
+                    <br />
+
+                    <div class="input-group  col-md-8 col-lg-8 col-sm-12 col-xs-12 col-md-offset-2">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        @Html.TextBoxFor(m => m.FullName, new { @class = "form-control", @Placeholder = "Nombre", @Required = "true" })
+                    </div>
+                    <br />
+
+                    <div class="input-group  col-md-8 col-lg-8 col-sm-12 col-xs-12 col-md-offset-2">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        <input type="text" class="form-control" placeholder="Apellido Paterno" name="nombre" required />
+                    </div>
+                    <br />
+
+                    <div class="input-group  col-md-8 col-lg-8 col-sm-12 col-xs-12 col-md-offset-2">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        <input type="text" class="form-control" placeholder="Apellido Materno" name="nombre" required />
+                    </div>
+                    <br />
+
+                    <div class="input-group  col-md-8 col-lg-8 col-sm-12 col-xs-12 col-md-offset-2">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        <input type="text" class="form-control" placeholder="Numero de control proporcionado por tu escuela o maestro" name="numero_control" required />
+                    </div>
+
+                    <br />
+
+
+                    <div class="form-group">
+                        <br />
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Registrarse" class="btn btn-success" />
+                        </div>
+                    </div>
+                }
+            </section>
+
+    </div>
+</div>
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script>
+    $(document).ready(function () {
+        document.getElementById("footer").style.marginTop = "15em";
+    });
+</script>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

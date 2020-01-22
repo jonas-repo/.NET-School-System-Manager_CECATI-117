@@ -1,0 +1,75 @@
+﻿@model IEnumerable<cecati_117.Models.EspecialidadDetalles>
+@{
+    ViewBag.Title = "Escoge tu especialidad";
+    int indice = 0;
+    int count = 0;
+}
+
+<style>
+    .img {
+        width: 100%;
+        height: auto;
+        max-height: 200px;
+        object-fit: cover;
+    }
+</style>
+
+
+<div id="main">
+    <!-- Title, Breadcrumb Start-->
+    <div class="breadcrumb-wrapper">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-xs-12 col-sm-6">
+                    <h2 class="title">Escoge tu especialidad</h2>
+                </div>
+                <div class="col-lg-6 col-md-6 col-xs-12 col-sm-6">
+                    <div class="breadcrumbs pull-right">
+                        <ul>
+                            <li>Estas aquí:</li>
+                            <li><a href="@Url.Action("Index","Home")">Inicio</a></li>
+                            <li>Escoge tu especialidad</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Title, Breadcrumb End-->
+    <!-- Main Content start-->
+    <div class="content">
+        <div class="container">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                @while (indice < Model.Count())
+                {
+                    <div class="row">
+                        <div class="portfolio two-column">
+                            @while (count < 2 && indice < Model.Count())
+                            {
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 item container">
+                                    <div class="portfolio-item column" style="background:none !important;">
+                                        <a href="@Url.Action("Index","Especialidades_Paginas", new { id = Model.ElementAt(indice).EspecialidadDetalles_ID })" class="portfolio-item-link">
+                                            <span class="portfolio-item-hover"></span><span class="fullscreen"><i class="fa fa-search"></i></span>
+                                            <img class="img" src="@Model.ElementAt(indice).EspecialidadDetalles_Imagen" @*style="width:100%; height:auto; object-fit: cover;"*@ />
+                                        </a>
+                                        <div class="portfolio-item-title">
+                                            <a href="@Url.Action("Index","Especialidades_Paginas", new { id = Model.ElementAt(indice).EspecialidadDetalles_ID })">@Model.ElementAt(indice).Id_Especialidad.ListaEspecialidades_especialidad</a>
+                                            <p>
+                                                @Model.ElementAt(indice).EspecialidadDetalles_titulo
+                                            </p>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </div>
+                                count++;
+                                indice++;
+                            }
+                        </div>
+                    </div>
+                    count = 0;
+                }
+            </div>
+        </div>
+    </div>
+</div>
+

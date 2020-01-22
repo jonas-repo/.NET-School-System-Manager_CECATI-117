@@ -1,0 +1,90 @@
+﻿@model IEnumerable<cecati_117.Models.ListaEspecialidades>
+
+@{
+    ViewBag.Title = "Indice de temas";
+    int count = 0;
+}
+
+<div class="page-title">
+    <div class="title_left">
+
+    </div>
+</div>
+<div class="clearfix"></div>
+<div class="row">
+    <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">
+
+                <ul class="nav navbar-right panel_toolbox">
+                    <li>
+                        <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <br />
+                <br />
+                <div class="panel panel-primary">
+                    <!-- Default panel contents -->
+                    <div class="panel-heading">
+                        <h3>Temas de especialidades</h3>
+                    </div>
+                    <div class="panel-body">
+                        <!-- start accordion -->
+                        <div class="accordion" id="accordion" role="tablist" >
+                            @foreach (var especialidad in Model)
+                            {
+                                <div class="panel">
+                                    <a class="panel-heading" role="tab" id="heading_@count" data-toggle="collapse" data-parent="#accordion" href="#collapse_@count" aria-controls="collapse_@count">
+                                        <h4 class="panel-title">@especialidad.ListaEspecialidades_especialidad</h4>
+                                    </a>
+                                    <div id="collapse_@count" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading_@count">
+                                        <div class="panel-body">
+                                            <table class="table table-hover  dt-responsive nowrap myTable" style="font-size:medium">
+                                                <thead>
+                                                    <tr>
+                                                        <th>
+                                                            Cursos
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                        <tr>
+                                                            <td>
+                                                                <ul class="list-group">
+                                                                    @foreach (var tema in especialidad.Temas)
+                                                                    {
+                                                                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                                            <a href="@Url.Action("create","Subtema", new { id = tema.Tema_id})" style="font-size:medium">
+                                                                                <span class="fa fa-plus-square" style="color:cornflowerblue"></span> @tema.Tema_nombre
+                                                                            </a>
+                                                                        </li>
+                                                                    }
+                                                                </ul>
+                                                            </td>                                                           
+                                                        </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                count++;
+                            }
+                        </div>
+                        <!-- end of accordion -->
+
+                    </div>
+
+
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+

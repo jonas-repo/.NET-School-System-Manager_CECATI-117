@@ -1,0 +1,28 @@
+﻿/*estilo para hacer las imagenes responsivas dentro de las tablas*/
+.s_container {
+    display: flex; /*flex*/
+}
+
+.ssm_opcion {
+    background: white;
+}
+
+    .ssm_opcion img {
+        max-width: 100%;
+        height: 100px;
+    }
+
+#text_opcion {
+    background: White flex: 1 0 50px; /*grow + no shrink + basis*/
+    display: flex; /*flex*/
+    justify-content: flex-end; /*horizontal right*/
+    align-items: flex-end; /*vertical bottom*/
+}
+
+
+/*ejemplo
+ <div class="s_container seleccion_simple_default" >
+    <div class="ssm_opcion" >
+        <img src="@Html.DisplayFor(modelItem => item.Noticias_ImagenURL)" / >
+   </div >
+ </div >*/

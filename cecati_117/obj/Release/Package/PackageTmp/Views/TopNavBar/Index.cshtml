@@ -1,0 +1,142 @@
+﻿@{
+//IEnumerable<cecati_117.Models.ListaEspecialidades> listaEspecialidades = ViewBag.listaEspecialidades;
+//IEnumerable<cecati_117.Models.Galeria> galerias = ViewBag.listaGalerias;
+}
+<!-- Header Start -->
+<header id="header">
+    <!-- Header Top Bar Start -->
+    <div class="top-bar">
+        <div class="slidedown collapse">
+            <div class="container">
+                <div class="phone-email pull-left">
+                    <a><i class="fa fa-phone"></i> Telefono : (452) 52-8-10-68</a>
+                    <a href="cecati117.dir@dgcft.sems.gob.mx"><i class="fa fa-envelope"></i> Email : cecati117.dir@dgcft.sems.gob.mx</a>
+                </div>
+                <div class="pull-right">
+                    <ul class="social pull-left">
+                        <li class="facebook"><a href="https://www.facebook.com/cecati.uruapan.75?lst=100001220432490%3A100024382057638%3A1532997053" target="_blank" rel="nofollow"><i class="fa fa-facebook"></i></a></li>
+                        @*<li class="twitter"><a href="#"><i class="fa fa-twitter"></i></a></li>*@
+                        <li class="linkedin"><a href="https://www.linkedin.com/company/cecati-117/" target="_blank" rel="nofollow"><i class="fa fa-linkedin"></i></a></li>
+                    </ul>
+                    @*<div id="search-form" class="pull-right">
+                            <form action="#" method="get">
+                                <input type="text" class="search-text-box">
+                            </form>
+                        </div>*@
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Header Top Bar End -->
+    <!-- Main Header Start -->
+    <div class="main-header" style="background:#f0f0f0 !important;">
+        <div class="container">
+            <!-- TopNav Start -->
+            <div class="topnav navbar-header">
+                <a class="navbar-toggle down-button" data-toggle="collapse" data-target=".slidedown">
+                    <i class="fa fa-angle-down icon-current"></i>
+                </a>
+            </div>
+            <!-- TopNav End -->
+            <!-- Logo Start -->
+            <div class="logo pull-left">
+                <h1>
+                    <a href="@Url.Action("Index", "Home")">
+                        <img src="~/assets/tema_pixma/img/logo.png" />
+                    </a>
+                </h1>
+            </div>
+            <!-- Logo End -->
+            <!-- Mobile Menu Start -->
+            <div class="mobile navbar-header">
+                <a class="navbar-toggle" data-toggle="collapse" href=".navbar-collapse">
+                    <i class="fa fa-bars fa-2x"></i>
+                </a>
+            </div>
+            <!-- Mobile Menu End -->
+            <!-- Menu Start -->
+            <nav class="collapse navbar-collapse menu " ">
+                <ul class="nav navbar-nav sf-menu">
+                    <li>
+                        <a href="@Url.Action("Index","Home")">
+                            Inicio
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="sf-with-ul">
+                            Nosotros
+                        </a>
+                        <ul>
+                            <li><a href="@Url.Action("Index","Presentation")" class="sf-with-ul">Presentación</a></li>
+                            <li><a href="@Url.Action("Index","Contact")" class="sf-with-ul">Contacto</a></li>
+                            <li><a href="@Url.Action("Index","Services")" class="sf-with-ul">Servicios</a></li>
+                            <li><a href="@Url.Action("Index", "Requisitos")" class="sf-with-ul">Requisitos de inscripción</a></li>
+                            <li><a href="@Url.Action("Index","Work")" class="sf-with-ul"> Bolsa de trabajo</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#" class="sf-with-ul">
+                            Especialidades <br />
+                            y cursos
+
+
+                        </a>
+                        <ul>
+
+                            <li><a href="@Url.Action("Index","ProxCursos")" class="sf-with-ul">Cursos próximos</a></li>
+                            <li>
+                                <a href="@Url.Action("Index","Escoge_Especialidad")" class="sf-with-ul">
+                                    Especialidades
+                                    @*<span class="sf-sub-indicator pull-right">
+                            <i class="fa fa-angle-right "></i>
+                        </span>*@
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Lista_Galerias","Gallery")" class="sf-with-ul">
+                            Galerías
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            Escuela <br />
+                            sustentable
+                        </a>
+                        <ul>
+
+                            <li><a href="@Url.Action("Index","SolarEnergy")" class="sf-with-ul">Aprovechamiento de energía solar</a></li>
+
+
+                        </ul>
+
+
+                   @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+                    {
+
+                        <li>
+                            <a href="~/Admin/PaginaInicio/Index" class="sf-with-ul">Panel</a>
+                        </li>
+
+                    }
+                    else if (Request.IsAuthenticated && User.IsInRole("Alumno") || Request.IsAuthenticated && User.IsInRole("Maestro"))
+                    {
+                        <li>
+                            <a href="~/Users/PaginaInicioUsers/Index" class="sf-with-ul">Panel</a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li><a href="@Url.Action("Login","Account")" class="sf-with-ul"> Iniciar sesión</a></li>
+                    }
+                    </ul>
+                </nav>
+                <!-- Menu End -->
+            </div>
+        </div>
+
+
+        <!-- Main Header End -->
+    </header>
+    <!-- Header End -->

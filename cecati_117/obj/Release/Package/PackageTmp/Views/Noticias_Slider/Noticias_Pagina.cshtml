@@ -1,0 +1,71 @@
+﻿@model cecati_117.Models.Noticias
+@{
+    ViewBag.Title = Model.Noticias_Titulo + "- Noticias";
+}
+<div id="main">
+    <!-- Title, Breadcrumb Start-->
+    <div class="breadcrumb-wrapper">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-xs-12 col-sm-6">
+                    <h2 class="title">Noticias</h2>
+                </div>
+                <div class="col-lg-6 col-md-6 col-xs-12 col-sm-6">
+                    <div class="breadcrumbs pull-right">
+                        <ul>
+                            <li>Estas aquí:</li>
+                            <li><a href="@Url.Action("Index","Home")">Inicio</a></li>
+                            <li>Noticias</li>
+                            <li>@Model.Noticias_Titulo</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Title, Breadcrumb End-->
+    <!-- Main Content start-->
+    <div class="content">
+        <div class="container">
+            <div class="row">
+                <div class="posts-block col-lg-9 col-md-9 col-sm-12 col-xs-12 bottom-pad">
+                    <article class="post hentry">
+                        <div class="post-image" style="border: none; background: none;">
+                            <a href="@Model.Noticias_ImagenURL" data-rel="prettyPhoto">
+                                <span class="img-hover"></span>
+                                <span class="fullscreen"><i class="fa fa-search"></i></span>
+                                <img src="@Model.Noticias_ImagenURL" alt="@Model.Noticias_Titulo" >
+                            </a>
+                        </div>
+                        <header class="post-header">
+                            <h3 class="content-title">@Model.Noticias_Titulo</h3>
+                            <div class="blog-entry-meta">
+                                <div class="blog-entry-meta-date">
+                                    <i class="fa fa-clock-o"></i>
+                                    <span class="blog-entry-meta-date">@ViewBag.Fecha</span>
+                                </div>
+                                @*<div class="blog-entry-meta-author">
+                                        <i class="fa fa-user"></i>
+                                        <a href="#" class="blog-entry-meta-author">John Doe</a>
+                                    </div>
+                                    <div class="blog-entry-meta-tags">
+                                        <i class="fa fa-tags"></i>
+                                        <a href="#">Web Design</a>,
+                                        <a href="#">Branding</a>
+                                    </div>
+                                    <div class="blog-entry-meta-comments">
+                                        <i class="fa fa-comments"></i>
+                                        <a href="#" class="blog-entry-meta-comments">3 comments</a>
+                                    </div>*@
+                            </div>
+                        </header>
+                        <div class="post-content">
+                            @Html.Raw(Model.Noticias_Descripcion)
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </div>
+    </div>
+    @{Html.RenderAction("Noticias_recientes", "Noticias_Slider");}
+</div>

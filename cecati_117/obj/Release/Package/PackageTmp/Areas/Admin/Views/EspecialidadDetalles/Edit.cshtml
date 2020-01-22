@@ -1,0 +1,227 @@
+﻿@model cecati_117.Models.EspecialidadDetalles
+
+@{
+    ViewBag.Title = "Editar página";
+    string[] ArregloCadenas = ViewBag.ListaCadenas;
+}
+
+<div class="page-title">
+    <div class="title_left">
+
+    </div>
+</div>
+<div class="clearfix"></div>
+<div class="row">
+    <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Editar página</h2>
+                <ul class="nav navbar-right panel_toolbox">
+                    <li>
+                        <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <br />
+                @if (ViewBag.NoEsImagen != null)
+                {
+                    <div class="alert alert-danger" role="alert">
+                        @ViewBag.NoEsImagen
+                    </div>
+                }
+                @using (Html.BeginForm("Edit", "EspecialidadDetalles", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.HiddenFor(x => x.EspecialidadDetalles_ID)
+                    <input type="hidden" value="@ViewBag.IdAsociado" name="IdEspecialidad_Asociado" />
+                    <input type="hidden" value="@ViewBag.UrlImagenAnterior" name="imagenAnterior" />
+
+                    <div class="form-horizontal">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.EspecialidadDetalles_titulo, htmlAttributes: new { @class = "control-label col-md-2 col-lg-2 col-sm-2 col-xs-2" })
+                            <div class="col-md-10 col-lg-10 col-sm-12 col-xs-12">
+                                @Html.EditorFor(model => model.EspecialidadDetalles_titulo, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.EspecialidadDetalles_titulo, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.EspecialidadDetalles_descripcion, htmlAttributes: new { @class = "control-label col-md-2 col-lg-2 col-sm-2 col-xs-2" })
+                            <div class="col-md-10 col-lg-10 col-sm-12 col-xs-12">
+                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                    <div id="alerts"></div>
+                                    <div class="btn-toolbar editor" data-role="editor-toolbar" data-target="#editor-one">
+                                        <div class="btn-group">
+                                            <a class="btn dropdown-toggle" data-toggle="dropdown" title="Font Size"><i class="fa fa-text-height"></i>&nbsp;<b class="caret"></b></a>
+                                            <ul class="dropdown-menu">
+                                                <li>
+                                                    <a data-edit="fontSize 5">
+                                                        <p style="font-size:17px">Grande</p>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a data-edit="fontSize 3">
+                                                        <p style="font-size:14px">Normal</p>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a data-edit="fontSize 1">
+                                                        <p style="font-size:11px">Pequeña</p>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="btn-group">
+                                            <a class="btn" data-edit="bold" title="Negrita (Ctrl/Cmd+B)"><i class="fa fa-bold"></i></a>
+                                            <a class="btn" data-edit="italic" title="Italica (Ctrl/Cmd+I)"><i class="fa fa-italic"></i></a>
+                                            <a class="btn" data-edit="strikethrough" title="Rayada"><i class="fa fa-strikethrough"></i></a>
+                                            <a class="btn" data-edit="underline" title="Subrayada (Ctrl/Cmd+U)"><i class="fa fa-underline"></i></a>
+                                        </div>
+                                        <div class="btn-group">
+                                            <a class="btn" data-edit="insertunorderedlist" title="Lista"><i class="fa fa-list-ul"></i></a>
+                                            <a class="btn" data-edit="insertorderedlist" title="Lista numerada"><i class="fa fa-list-ol"></i></a>
+                                        </div>
+                                        <div class="btn-group">
+                                            <a class="btn" data-edit="justifyleft" title="Alinear Izquierda (Ctrl/Cmd+L)"><i class="fa fa-align-left"></i></a>
+                                            <a class="btn" data-edit="justifycenter" title="Centrar (Ctrl/Cmd+E)"><i class="fa fa-align-center"></i></a>
+                                            <a class="btn" data-edit="justifyright" title="Alinear Derecha (Ctrl/Cmd+R)"><i class="fa fa-align-right"></i></a>
+                                            <a class="btn" data-edit="justifyfull" title="Justificar (Ctrl/Cmd+J)"><i class="fa fa-align-justify"></i></a>
+                                        </div>
+                                        <div class="btn-group">
+                                            <a class="btn dropdown-toggle" data-toggle="dropdown" title="Hipervinculo"><i class="fa fa-link"></i></a>
+                                            <div class="dropdown-menu input-append">
+                                                <input class="span2" placeholder="URL de la pagina" type="text" data-edit="createLink" />
+                                                <button class="btn" type="button">Agregar</button>
+                                            </div>
+                                            <a class="btn" data-edit="unlink" title="Quitar Hipervinculo"><i class="fa fa-cut"></i></a>
+                                        </div>
+                                        <div class="btn-group">
+                                            <a class="btn" data-edit="undo" title="Deshacer (Ctrl/Cmd+Z)"><i class="fa fa-undo"></i></a>
+                                            <a class="btn" data-edit="redo" title="Rehacer (Ctrl/Cmd+Y)"><i class="fa fa-repeat"></i></a>
+                                        </div>
+                                    </div>
+                                    <div id="editor-one" class="editor-wrapper" onchange="GetDiv()">
+                                        @Html.Raw(Model.EspecialidadDetalles_descripcion)
+                                    </div>
+                                    <textarea name="__descr" id="descr" style="display:none;"></textarea>
+                                    <br />
+                                    <div class="ln_solid"></div>
+                                </div>
+                                @*@Html.TextAreaFor(model => model.EspecialidadDetalles_descripcion, new { style = "width: 600px; height: 200px;", htmlAttributes = new { @class = "form-control" } })*@
+                                @Html.ValidationMessageFor(model => model.EspecialidadDetalles_descripcion, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.EspecialidadDetalles_Imagen, htmlAttributes: new { @class = "control-label col-md-2 col-lg-2 col-sm-2 col-xs-2" })
+                            <div class="col-md-10 col-lg-10 col-sm-12 col-xs-12">
+                                @*@Html.(model => model.InicioCarrusel_ImagenURL, new { htmlAttributes = new { @class = "form-control" } })*@
+
+                                <div class="col-md-55">
+                                    <div class="thumbnail">
+                                        <div class="image view view-first">
+                                            <img style="width: 100%; display: block;" src="@Html.DisplayTextFor(modelItem => modelItem.EspecialidadDetalles_Imagen)" alt="imagen" id="image_upload_preview" />
+                                        </div>
+                                        <div class="caption">
+                                            <input type="file" class="form-control" name="imagen" id="InputFile" />
+                                        </div>
+                                    </div>
+                                </div>
+                                @Html.ValidationMessageFor(model => model.EspecialidadDetalles_Imagen, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.EspecialidadDetalles_ListaAprendizaje, htmlAttributes: new { @class = "control-label col-md-2 col-lg-2 col-sm-2 col-xs-2" })
+                            <div class="col-md-10 col-lg-10 col-sm-12 col-xs-12">
+                                @*@Html.EditorFor(model => model.InicioCarrusel_ListaAprendizaje, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.InicioCarrusel_ListaAprendizaje, "", new { @class = "text-danger" })*@
+                                <table class="table table-striped" id="tabla_listaAprendizaje">
+                                    <thead>
+                                        <tr>
+                                            <th>Nombre de actividad a aprender</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var cadena in ArregloCadenas)
+                                        {
+                                            <tr>
+                                                <td>
+                                                    <input type="text" class="form-control" value="@cadena" name="actividades" />
+                                                </td>
+                                                <td>
+                                                    <a type="button" class="btn btn-danger borrar">Eliminar</a>
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                                <input type="text" class="form-control" id="input_agregarListaAprendizaje" />
+                                <button type="button" class="btn btn-default" id="botonAgregarListaAprendizaje">Agregar</button>
+                            </div>
+                        </div>
+                        <div class="ln_solid"></div>
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-lg-offset-2 col-md-10 col-lg-10 col-sm-12 col-xs-12">
+                                <input type="submit" value="Guardar cambios" class="btn btn-success" />
+                                <a href="@Url.Action("Index","ListaEspecialidades")" class="btn btn-default">Cancelar</a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script>
+    $(document).ready(function () {
+        var s = $('#editor-one').html()
+        $('#descr').val(s);
+    })
+        //*************************** para agregar a la tabla de la lista de aprendizaje
+        $('#botonAgregarListaAprendizaje').click(function () {
+
+            var texto_input_agregarListaAprendizaje = $('#input_agregarListaAprendizaje').val();
+
+
+            $('#tabla_listaAprendizaje > tbody:last-child').append(
+                "<tr>"
+                + "<td><input type='text' class='form-control' value='" + texto_input_agregarListaAprendizaje + "' name='actividades' /></td>"
+                + "<td> <a type='button' class='btn btn-danger borrar'>Eliminar</a></td>"
+                + "</tr > "
+            );
+        });
+
+        $('#tabla_listaAprendizaje').on('click', '.borrar', function () {
+            $(this).closest('tr').remove();
+        });
+        //*****************************
+
+        //*************************** para previsualizar una imagen antes de cargarla a la base de datos
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#image_upload_preview').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        $("#InputFile").change(function () {
+            readURL(this);
+        });
+            //*******************************************************************************************************
+    //********************************************************para obtener todo el codigo html del div del editor de texto
+    function GetDiv() {
+        var s = $('#editor-one').html()
+        $('#descr').val(s);
+    }
+</script>

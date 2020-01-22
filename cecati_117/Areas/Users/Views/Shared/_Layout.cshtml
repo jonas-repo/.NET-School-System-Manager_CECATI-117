@@ -1,0 +1,131 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#0488cd" />
+    <link rel="icon" href="~/assets/tema_pixma/img/ico/favicon.ico" type="image/ico" />
+    <title>@ViewBag.Title CECATI 117</title>
+    <!-- Bootstrap -->
+    <link href="~/assets/tema_gentella_allela/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Font Awesome -->
+    <link href="~/assets/tema_gentella_allela/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+    <!-- NProgress -->
+    <link href="~/assets/tema_gentella_allela/vendors/nprogress/nprogress.css" rel="stylesheet" />
+    <!-- iCheck -->
+    <link href="~/assets/tema_gentella_allela/vendors/iCheck/skins/flat/green.css" rel="stylesheet" />
+    <!-- bootstrap-progressbar -->
+    <link href="~/assets/tema_gentella_allela/vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet" />
+    <!-- bootstrap-wysiwyg -->
+    <link href="~/assets/tema_gentella_allela/vendors/google-code-prettify/prettify.min.css" rel="stylesheet" />
+    <!-- Select2 -->
+    <link href="~/assets/tema_gentella_allela/vendors/select2/dist/css/select2.min.css" rel="stylesheet" />
+    <!-- Switchery -->
+    <link href="~/assets/tema_gentella_allela/vendors/switchery/dist/switchery.min.css" rel="stylesheet" />
+    <!-- starrr -->
+    <link href="~/assets/tema_gentella_allela/vendors/starrr/dist/starrr.css" rel="stylesheet" />
+    <!-- bootstrap-daterangepicker -->
+    <link href="~/assets/tema_gentella_allela/vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet" />
+    <!-- Custom Theme Style -->
+    <link href="~/assets/tema_gentella_allela/build/css/custom.min.css" rel="stylesheet" />
+    <!-- Plugin de tablas responsive -->
+    <link href="~/assets/plugins/DataTables/datatables.min.css" rel="stylesheet" />
+    <!-- Plugin de imagenes responsive dentro de tablas -->
+    <link href="~/assets/plugins/ImagenesResponsivas.css" rel="stylesheet" />
+    <link href="~/assets/plugins/basicTable_responsive/basictable.css" rel="stylesheet" />
+
+</head>
+<body class="nav-md">
+    <div class="container body">
+        <div class="main_container">
+            @{Html.RenderAction("Izquierda", "BarraIzquierda_Users");}
+            @Html.Partial("_BarraSuperior")
+            <div class="right_col" role="main">
+                <div class="">
+                    @RenderBody()
+                </div>
+            </div>
+            @Html.Partial("_Footer")
+        </div>
+    </div>
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <!-- Plugin de tablas responsive -->
+    <script src="~/assets/plugins/DataTables/datatables.js"></script>
+    <script>
+        $(document).ready(function () {
+            $.noConflict();
+            $('.myTable').DataTable({
+                responsive: true,
+                language: {
+                    "sProcessing": "Procesando...",
+                    "sLengthMenu": "Mostrar _MENU_ registros",
+                    "sZeroRecords": "No se encontraron resultados",
+                    "sEmptyTable": "Ningún dato disponible en esta tabla",
+                    "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+                    "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+                    "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+                    "sInfoPostFix": "",
+                    "sSearch": "Buscar:",
+                    "sUrl": "",
+                    "sInfoThousands": ",",
+                    "sLoadingRecords": "Cargando...",
+                    "oPaginate": {
+                        "sFirst": "Primero",
+                        "sLast": "Último",
+                        "sNext": "Siguiente",
+                        "sPrevious": "Anterior"
+                    },
+                    "oAria": {
+                        "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                        "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+                    }
+                }
+            });
+        });
+    </script>
+    <!-- jQuery -->
+    <script src="~/assets/tema_gentella_allela/vendors/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="~/assets/tema_gentella_allela/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- FastClick -->
+    <script src="~/assets/tema_gentella_allela/vendors/fastclick/lib/fastclick.js"></script>
+    <!-- NProgress -->
+    <script src="~/assets/tema_gentella_allela/vendors/nprogress/nprogress.js"></script>
+    <!-- bootstrap-progressbar -->
+    <script src="~/assets/tema_gentella_allela/vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+    <!-- iCheck -->
+    <script src="~/assets/tema_gentella_allela/vendors/iCheck/icheck.min.js"></script>
+    <!-- bootstrap-daterangepicker -->
+    <script src="~/assets/tema_gentella_allela/vendors/moment/min/moment.min.js"></script>
+    <script src="~/assets/tema_gentella_allela/vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
+    <!-- bootstrap-wysiwyg -->
+
+    <script src="~/assets/tema_gentella_allela/vendors/bootstrap-wysiwyg/js/bootstrap-wysiwyg.min.js"></script>
+    <script src="~/assets/tema_gentella_allela/vendors/jquery.hotkeys/jquery.hotkeys.js"></script>
+    <script src="~/assets/tema_gentella_allela/vendors/google-code-prettify/src/prettify.js"></script>
+    <!-- jQuery Tags Input -->
+    <script src="~/assets/tema_gentella_allela/vendors/jquery.tagsinput/src/jquery.tagsinput.js"></script>
+    <!-- Switchery -->
+    <script src="~/assets/tema_gentella_allela/vendors/switchery/dist/switchery.min.js"></script>
+    <!-- Select2 -->
+    <script src="~/assets/tema_gentella_allela/vendors/select2/dist/js/select2.full.min.js"></script>
+    <!-- Parsley -->
+    @*<script src="~/tema_backend/vendors/parsleyjs/dist/parsley.min.js"></script>*@
+    <!-- Autosize -->
+    <script src="~/assets/tema_gentella_allela/vendors/autosize/dist/autosize.min.js"></script>
+    <!-- jQuery autocomplete -->
+    <script src="~/assets/tema_gentella_allela/vendors/devbridge-autocomplete/dist/jquery.autocomplete.min.js"></script>
+    <!-- starrr -->
+    <script src="~/assets/tema_gentella_allela/vendors/starrr/dist/starrr.js"></script>
+    <!-- Custom Theme Scripts -->
+    <script src="~/assets/tema_gentella_allela/build/js/custom.min.js"></script>
+    <!-- JQVMap -->
+    <script src="~/assets/tema_gentella_allela/vendors/jqvmap/dist/jquery.vmap.min.js"></script>
+
+
+
+</body>
+</html>

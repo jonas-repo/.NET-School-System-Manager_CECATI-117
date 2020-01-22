@@ -1,0 +1,79 @@
+﻿@model cecati_117.Models.EspecialidadDetalles
+@{
+    ViewBag.Title = "Información, especialidad " + Model.Id_Especialidad.ListaEspecialidades_especialidad;
+    string[] listaActividades = ViewBag.Actividades;
+}
+<div id="main">
+    <!-- Title, Breadcrumb Start-->
+    <div class="breadcrumb-wrapper">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-xs-12 col-sm-6">
+                    <h2 class="title">@Model.Id_Especialidad.ListaEspecialidades_especialidad</h2>
+                </div>
+                <div class="col-lg-6 col-md-6 col-xs-12 col-sm-6">
+                    <div class="breadcrumbs pull-right">
+                        <ul>
+                            <li>Estas aquí:</li>
+                            <li><a href="@Url.Action("Index","Home")">Inicio</a></li>
+                            <li>Especialidades</li>
+                            <li>@Model.Id_Especialidad.ListaEspecialidades_especialidad</li>
+                            <li>@Model.EspecialidadDetalles_titulo</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Title, Breadcrumb End-->
+    <!-- Main Content start-->
+    <div class="content">
+        <div class="container">
+            <div class="row">
+                <div class="posts-block col-lg-9 col-md-8 col-sm-12 col-xs-12">
+                    <article>
+                        <h3 class="title">Contenido de la especialidad</h3>
+                        <div class="post-content">
+                            <div class="img-content col-lg-10 col-md-10 col-xs-12 col-sm-12">
+                                <img src="@Model.EspecialidadDetalles_Imagen" />
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
+                                <h2>@Model.EspecialidadDetalles_titulo</h2>
+                                @Html.Raw(Model.EspecialidadDetalles_descripcion)
+                            </div>
+                        </div>
+                    </article>
+                </div>
+                <!-- Left Section End -->
+                <!-- Skill Section Start -->
+              
+                <div class="choice col-lg-3 col-md-4 col-sm-12 col-xs-12">
+                    <h3 class="title">Lo que aprenderás</h3>
+                    <ul class="check-list why">
+
+                        @foreach (var actividad in listaActividades)
+                        {
+                            <li>
+                                @actividad
+                                <hr />
+                            </li>
+                        }
+                    </ul>
+                </div>
+                <!-- Skill Section Start -->
+            </div>
+        </div>
+    </div>
+</div>
+<div class="divider"></div>
+<div class="divider"></div>
+@{Html.RenderAction("PortFolio_Slider", "PortFolioSlider_especialidades");}
+
+
+
+
+
+
+
+<div class="divider"></div>
+

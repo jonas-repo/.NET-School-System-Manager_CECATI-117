@@ -1,0 +1,168 @@
+﻿@model cecati_117.Models.Persona
+
+@{
+    ViewBag.Title = "Crear alumno";
+    IEnumerable<cecati_117.Models.ListaEspecialidades> listaEspecialidades = ViewBag.Especialidad;
+    int count = 0;
+}
+
+<link href="~/assets/plugins/AjaxPlugins/style.css" rel="stylesheet" />
+<div class="row">
+    <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Registrar un alumno</h2>
+                <ul class="nav navbar-right panel_toolbox">
+                    <li>
+                        <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                @using (Html.BeginForm("Crear", "NumeroControl"))
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-horizontal">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="form-group">
+                            <label class="control-label col-md-2">Cantidad de alumnos a registrar</label>
+
+                            <div class="col-md-10">
+                                <input type="number" class="form-control" placeholder="Cantidad de alumnos" id="cantidad_alumnos" required/>
+                                <br />
+                                <button type="button" class="btn btn-success" onclick="creaCajas()">Generar campos</button>
+                                <br />
+                                <br />
+                                <br />
+                                <table class="table table-hover table-responsive">
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                                Numero de control
+                                            </th>
+                                            <th>
+                                                
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="control_number_body"></tbody>
+
+                                </table>
+                            </div>
+                        </div>
+                        <hr />
+
+                        <div class="form-group" id="especialidad_tabla">
+                            <label class="col-md-2 col-lg-2 col-sm-12 col-xs-12 control-label">Especialidad a asignar</label>
+                            <div class="col-md-10 col-lg-10 col-sm-12 col-xs-12">
+                                <table class="table table-hover">
+                                    @foreach (var especialidad in listaEspecialidades)
+                                    {
+                                        if (count == 0)
+                                        {
+                                            <tr>
+                                                <td>
+                                                    <input type="radio" name="id_listaEspecialidades" value="@especialidad.ListaEspecialidades_ID" class="flat" checked>
+                                                    @especialidad.ListaEspecialidades_especialidad
+                                                </td>
+                                            </tr>
+                                        }
+                                        else
+                                        {
+                                            <tr>
+                                                <td>
+                                                    <input type="radio" name="id_listaEspecialidades" value="@especialidad.ListaEspecialidades_ID" class="flat" >
+                                                    @especialidad.ListaEspecialidades_especialidad
+                                                </td>
+                                            </tr>
+                                        }
+
+                                        count++;
+
+                                    }
+                                </table>
+
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <button type="submit" data-ajax="true" class="btn btn-success">Registrar todo</button>
+                            </div>
+                        </div>
+                    </div>
+                    <hr />
+                }
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-lg-offset-2 col-md-10 col-lg-10 col-sm-12 col-xs-12">
+                        <table class="table table-hover table-bordered dt-responsive nowrap myTable" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Numero_control)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Nombre)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Apellido_paterno)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Apellido_materno)
+                                    </th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody id="tbody"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+
+@section Scripts {
+
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/assets/plugins/AjaxPlugins/ini.js"></script>
+    <script src="~/assets/plugins/AjaxPlugins/jquery.form.js"></script>
+
+
+    <script>
+    CargarTabla();
+
+    function CargarTabla() {
+         $("#tbody").load('@Url.Content("~/Admin/NumeroControl/TablaNumerosControl/")');
+    };
+
+        function creaCajas() {
+            var numCajas = $("#cantidad_alumnos").val();
+            $("#control_number_body").empty();
+          
+            for (var j = 0; j < numCajas; j++) {
+                var TR = document.createElement("tr");
+                var TD2 = document.createElement("td");
+                var TD3 = document.createElement("td");
+                TD2.innerHTML = "<input type='text' name='alumnos' class='form-control' placeholder='Numero de control' required/> ";
+                TD3.innerHTML = "<td> <a type='button' class='btn btn-danger borrar'>Eliminar</a></td>";
+                TR.appendChild(TD2);
+                TR.appendChild(TD3);
+                $("#control_number_body").append(TR);
+            }
+            
+        }
+        $('#control_number_body').on('click', '.borrar', function () {
+            $(this).closest('tr').remove();
+        });
+    </script>
+
+}

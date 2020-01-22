@@ -1,0 +1,88 @@
+﻿
+@{
+    ViewBag.Title = "Calificaciones";
+    ICollection<cecati_117.Models.Calificacion> calificaciones = ViewBag.calificaciones;
+    cecati_117.Models.Persona persona = ViewBag.persona;
+    int count = 0;
+}
+
+<div class="clearfix"></div>
+<div class="row">
+    <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">
+
+                <ul class="nav navbar-right panel_toolbox"></ul>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <br />
+                <h3>Tus calificaciones</h3>
+                <br />
+                @foreach (var especialidadPersona in persona.Especialidades)
+                {
+
+                    <div class="panel panel-primary">
+                        <!-- Default panel contents -->
+                        <div class="panel-heading">
+                            <h3>  <span class="fa fa-check"></span> @especialidadPersona.Especialidad.ListaEspecialidades_especialidad</h3>
+                        </div>
+                        <div class="panel-body">
+                           <!-- start accordion -->
+                            <div class="accordion" id="accordion" role="tablist" aria-multiselectable="true">
+                                @foreach (var tema in especialidadPersona.Especialidad.Temas)
+                                {
+                                    <div class="panel">
+                                        <a class="panel-heading" role="tab" id="heading_@count" data-toggle="collapse" data-parent="#accordion" href="#collapse_@count" aria-controls="collapse_@count">
+                                            <h4 class="panel-title">@tema.Tema_nombre</h4>
+                                        </a>
+                                        <div id="collapse_@count" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading_@count">
+                                            <div class="panel-body">
+                                                <table class="table table-hover  dt-responsive nowrap myTable" style="font-size:medium">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>
+                                                                Tema
+                                                            </th>
+                                                            <th>
+                                                                Calificacion
+                                                            </th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @foreach (var subtema in tema.Subtemas)
+                                                        {
+                                                            <tr>
+                                                                <td>
+                                                                    @subtema.Subtema_nombre
+                                                                </td>
+                                                                <td>
+                                                                     @{var a = calificaciones.FirstOrDefault(
+                                                                                        x => x.Subtema.Subtema_id.Equals(subtema.Subtema_id)
+                                                                                        && x.Alumno.Persona_id.Equals(persona.Persona_id))?.Calificacion_total;}
+                                                                    @a
+                                                                </td>
+                                                            </tr>
+                                                        }
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    count++;
+                                }
+                            </div>
+                            <!-- end of accordion -->
+
+                        </div>
+
+
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

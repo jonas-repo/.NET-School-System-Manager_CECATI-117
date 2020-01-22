@@ -1,0 +1,80 @@
+﻿@{
+    cecati_117.Models.Persona datos_usuario = ViewBag.Usuario;
+}
+
+
+<div class="col-md-3 left_col">
+    <div class="left_col scroll-view">
+        <div class="navbar nav_title" style="border: 0;">
+            <a href="~/home/index" class="site_title"><i class="fa fa-graduation-cap"></i> <span>CECATI 117</span></a>
+        </div>
+        <div class="clearfix"></div>
+        <!-- menu profile quick info -->
+        <div class="profile clearfix">
+            @if (!String.IsNullOrEmpty(datos_usuario.Foto_perfil))
+            {<div class="profile_pic">
+                    <img src="@datos_usuario.Foto_perfil" alt="@datos_usuario.Nombre" class="img-circle profile_img">
+                </div>
+             }
+             <div class="profile_info">
+                 @using Microsoft.AspNet.Identity
+                 @if (datos_usuario.Genero)
+                 {
+                     <span>Bienvenido</span>
+                 }
+                 else
+                 {
+                     <span>Bienvenida</span>
+                 }
+
+                 <h2>
+                     @datos_usuario.Nombre
+                 </h2>
+             </div>
+            </div>
+        <!-- /menu profile quick info -->
+        <br />
+        <!-- sidebar menu -->
+        <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+            <div class="menu_section">
+                <h3>General</h3>
+                <ul class="nav side-menu">
+                    <li>
+                        <a href="@Url.Action("Index","PaginaInicioUsers")"><i class="fa fa-home"></i> Inicio</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Edit","MiPerfil")"><i class="fa fa-user"></i> Mi perfil</a>
+                    </li>
+                    @if (datos_usuario.Rol.Equals("Maestro"))
+                    {
+                        <li>
+                            <a href="@Url.Action("Index","Grupo")"><i class="fa fa-group"></i> Mis grupos </a>
+                        </li>                        
+                        <li>
+                            <a href="@Url.Action("Index","Calificacions")"><i class="fa fa-edit"></i> Calificaciones </a>
+                        </li>
+                        
+                    }
+                    @if (datos_usuario.Rol.Equals("Alumno"))
+                    {
+                        <li>
+                            <a href="@Url.Action("Index","AlumnoCalificacion")"><i class="fa fa-edit"></i> Calificaciones </a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("Index","AlumnoGrupo")"><i class="fa fa-group"></i> Mis grupos </a>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+        <!-- /sidebar menu -->
+        <!-- /menu footer buttons -->
+        <div class="sidebar-footer hidden-small">
+            <a data-toggle="tooltip" data-placement="top" title="Cerrar sesión" href="/Account/LogOff/">
+                <span class="fa fa-sign-out" aria-hidden="true"></span>
+            </a>
+        </div>
+        <!-- /menu footer buttons -->
+    </div>
+</div>
+

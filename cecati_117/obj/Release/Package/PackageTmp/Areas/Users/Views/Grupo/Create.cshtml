@@ -1,0 +1,103 @@
+﻿@model cecati_117.Models.Grupo
+@{
+    cecati_117.Models.Persona persona = ViewBag.persona;
+    int count = 0;
+    ViewBag.Title = "Registro";
+}
+<div class="clearfix"></div>
+<div class="row">
+    <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Crear grupo</h2>
+                <ul class="nav navbar-right panel_toolbox">
+                    <li>
+                        <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <br />
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+
+                <div class="form-horizontal">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Nombre_grupo, htmlAttributes: new { @class = "control-label col-md-2  col-sm-12 col-xs-12" })
+                        <div class="col-md-8 col-lg-8 col-sm-12 col-xs-12">
+                            @Html.EditorFor(model => model.Nombre_grupo, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Nombre_grupo, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Turno, htmlAttributes: new { @class = "control-label col-md-2  col-sm-12 col-xs-12" })
+                        <div class="col-md-8 col-lg-8 col-sm-12 col-xs-12">
+                            @Html.EditorFor(model => model.Turno, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Turno, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Ciclo_escolar, htmlAttributes: new { @class = "control-label col-md-2  col-sm-12 col-xs-12" })
+                        <div class="col-md-8 col-lg-8 col-sm-12 col-xs-12">
+                            @Html.EditorFor(model => model.Ciclo_escolar, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Ciclo_escolar, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Horario, htmlAttributes: new { @class = "control-label col-md-2  col-sm-12 col-xs-12" })
+                        <div class="col-md-8 col-lg-8 col-sm-12 col-xs-12">
+                            @Html.EditorFor(model => model.Horario, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Horario, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-2  col-sm-12 col-xs-12">
+                            Especialidad de este grupo
+                        </label>
+                        <div class="col-md-8 col-lg-8 col-sm-12 col-xs-12">
+                            <table class="table table-hover">
+                            @foreach (var especialidad in persona.Especialidades)
+                            {
+                                if (count == 0)
+                                {
+                                    <tr>
+                                        <td>
+                                            <input type="radio" name="id_listaEspecialidades" value="@especialidad.Especialidad.ListaEspecialidades_ID" class="flat" checked>
+                                            @especialidad.Especialidad.ListaEspecialidades_especialidad
+                                        </td>
+                                    </tr>
+                                }
+                                else
+                                {
+                                    <tr>
+                                        <td>
+                                            <input type="radio" name="id_listaEspecialidades" value="@especialidad.Especialidad.ListaEspecialidades_ID" class="flat">
+                                            @especialidad.Especialidad.ListaEspecialidades_especialidad
+                                        </td>
+                                    </tr>
+                                }
+                                count++;
+                            }
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Guardar cambios" class="btn btn-success" />
+                            <a class="btn btn-default" href="@Url.Action("Index","Grupo")">Cancelar</a>
+                        </div>
+                    </div>
+                </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

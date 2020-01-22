@@ -1,0 +1,81 @@
+﻿@model IEnumerable<cecati_117.Models.BolsaDeTrabajo>
+@{
+    ViewBag.Title = "Bolsa de trabajo disponible";
+    int count = 0;
+    int indice = 0;
+}
+<div class="breadcrumb-wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-xs-12 col-sm-6">
+                <h2 class="title">Bolsa de trabajo</h2>
+            </div>
+            <div class="col-lg-6 col-md-6 col-xs-12 col-sm-6">
+                <div class="breadcrumbs pull-right">
+                    <ul>
+                        <li>Estas aquí:</li>
+                        <li><a href="@Url.Action("Index","Home")">Inicio</a></li>
+                        <li>Bolsa de trabajo</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="content">
+    <div class="container">
+        <div class="row">
+            <div class="posts-block col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <article>
+                    <div class="post-content">
+                        <p>
+                            Cecati 117 se preocupa por ti aún cuándo ya eres egresado, aquí tienes algunas ofertas de trabajo que se adaptan a tus aptitudes.
+                        </p>
+                    </div>
+                </article>
+            </div>
+            <!-- Left Section End -->
+        </div>
+        <!-- 2 Column Testimonials -->
+        <div class="row">
+            @*@foreach (var trabajo in Model)
+            {
+                <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                    <div class="contact-box widget">
+                        <h3>@trabajo.BolsaDeTrabajo_Titulo</h3>
+                        @Html.Raw(trabajo.BolsaDeTrabajo_Descripción)
+                    </div>
+                </div>
+            }*@
+
+            @while (indice < Model.Count())
+            {
+                <div class="col-lg-12 col-md-12 col-xs-12">
+                    <div class="row portfolio-pad">
+                        @while (count < 3 && indice < Model.Count())
+                        {
+                        <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                            <div class="contact-box widget">
+                                <h3>@Model.ElementAt(indice).BolsaDeTrabajo_Titulo</h3>
+                                @Html.Raw(Model.ElementAt(indice).BolsaDeTrabajo_Descripción)
+                            </div>
+                        </div>
+                            count++;
+                            indice++;
+                        }
+
+                    </div>
+                </div>
+                count = 0;
+
+            }
+
+            <!-- contact box end End-->
+        </div>
+    </div>
+    <!-- Main Content end-->
+</div>
+<!-- Content End -->
+<div class="divider"></div>

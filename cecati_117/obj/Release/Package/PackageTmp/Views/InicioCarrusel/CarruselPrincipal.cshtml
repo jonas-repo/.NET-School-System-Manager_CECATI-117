@@ -1,0 +1,125 @@
+﻿@model IEnumerable<cecati_117.Models.InicioCarrusel_ListaDesplegada>
+<link href="~/assets/carruselOscurecer.css" rel="stylesheet" />
+<div class="fullwidthbanner-container">
+    <div class="fullwidthbanner rslider">
+        <ul>
+            <!-- THE FIRST SLIDE -->
+            <li data-delay="6000" data-masterspeed="300" data-transition="fade">
+                <div class="slotholder">
+                    <img src="~/img/InicioCarrusel/slider1.png"  data-fullwidthcentering="on" alt="Cecati"/>
+                </div>
+                <div class="caption modern_big_bluebg h1 lft tp-caption start"
+                     data-x="40"
+                     data-y="85"
+                     data-speed="700"
+                     data-endspeed="800"
+                     data-start="1000"
+                     data-easing="easeOutQuint"
+                     data-endeasing="easeOutQuint">
+                    <h3>Bienvenido a CECATI 117</h3>
+                </div>
+                <div class="caption list_slide lfb tp-caption start"
+                     data-easing="easeOutExpo"
+                     data-start="1400"
+                     data-speed="1050"
+                     data-y="180"
+                     data-x="40">
+                    <div class="list-slide">
+                        <i class="fa fa-book slide-icon"></i>
+                        <h5 @*class=""*@> Estudia con nosotros  </h5>
+                    </div>
+                </div>
+                <div class="caption list_slide lfb tp-caption start"
+                     data-easing="easeOutExpo"
+                     data-start="1800"
+                     data-speed="1200"
+                     data-y="220"
+                     data-x="40">
+                    <div class="list-slide">
+                        <i class="fa fa-graduation-cap slide-icon"></i>
+                        <h5 @*class="dblue"*@> Especialidades con certificación ante la SEP </h5>
+                    </div>
+                </div>
+                <div class="caption list_slide lfb tp-caption start"
+                     data-easing="easeOutExpo"
+                     data-start="2200"
+                     data-speed="1350"
+                     data-y="260"
+                     data-x="40">
+                    <div class="list-slide">
+                        <i class="fa fa-line-chart slide-icon"></i>
+                        <h5 @*class="dblue"*@> Preparación para tu trabajo o tu propio negocio </h5>
+                    </div>
+                </div>
+                <div class="caption lfb caption_button_1 fadeout tp-caption start"
+                     data-x="40"
+                     data-y="330"
+                     data-speed="900"
+                     data-endspeed="300"
+                     data-start="2700"
+                     data-hoffset="-70"
+                     data-easing="easeOutExpo">
+                    <a class="btn-special hidden-xs btn-grey" href="@Url.Action("Index", "Services")">Ver más</a>
+                </div>
+                <div class="caption lfb caption_button_2 fadeout tp-caption start"
+                     data-x="250"
+                     data-y="330"
+                     data-speed="800"
+                     data-endspeed="300"
+                     data-start="2900"
+                     data-hoffset="70"
+                     data-easing="easeOutExpo">
+                    <a class="btn-special hidden-xs btn-color" href="@Url.Action("Index", "Requisitos")">Requisitos</a>
+                </div>
+            </li>
+            <!-- THE RESPONSIVE SLIDE -->
+            @foreach (var carrusel in Model)
+            {
+                int dataStart = 1400;
+                int dataspeed = 1050;
+                int datay = 120;
+                int datax = 40;
+                <li data-transition="fade" data-slotamount="1" data-masterspeed="300">
+                    <div class="slotholder filtro-oscurecer">
+                        <img src="@carrusel.InicioCarrusel_ImagenURL" data-fullwidthcentering="on" alt="@carrusel.InicioCarrusel_Titulo">
+                    </div>
+                    <div class="caption large_text sft"
+                         data-x="40"
+                         data-y="54"
+                         data-speed="300"
+                         data-start="800"
+                         data-easing="easeOutExpo">
+                        @carrusel.InicioCarrusel_Titulo
+                    </div>
+                    @foreach (var cadena in carrusel.InicioCarrusel_ListaDeAprendizajes)
+                    {
+                        <div class="caption list_slide lfb tp-caption start"
+                             data-easing="easeOutExpo"
+                             data-start="@dataStart"
+                             data-speed="@dataspeed"
+                             data-y="@datay"
+                             data-x="@datax">
+                            <div class="list-slide">
+                                <i class="fa fa-check slide-icon"></i>
+                                <h5>@cadena</h5>
+                            </div>
+                        </div>
+                        dataStart = dataStart + 400;
+                        dataspeed = dataspeed + 150;
+                        datay = datay + 40;
+                    }
+
+                    <div class="caption lfl"
+                         data-x="660"
+                         data-y="100"
+                         data-speed="300"
+                         data-start="1400"
+                         data-easing="easeOutExpo">
+                        <img src="@carrusel.InicioCarrusel_MiniImagenUrl" alt="miniImagen" width="300">
+                    </div>
+                </li>
+            }
+
+        </ul>
+    </div>
+</div>

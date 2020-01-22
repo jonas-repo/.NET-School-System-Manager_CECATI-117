@@ -1,0 +1,50 @@
+﻿@model IEnumerable<cecati_117.Models.Presentacion>
+@{
+    ViewBag.Title = "Presentación";
+}
+
+<link href="~/assets/plugins/vertical-timeline-master/css/style.css" rel="stylesheet" />
+
+<div class="breadcrumb-wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-xs-12 col-sm-6">
+                <h2 class="title">Presentación</h2>
+            </div>
+            <div class="col-lg-6 col-md-6 col-xs-12 col-sm-6">
+                <div class="breadcrumbs pull-right">
+                    <ul>
+                        <li>Estas aquí:</li>
+                        <li><a href="@Url.Action("Index","Home")">Inicio</a></li>
+                        <li>Presentación</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <section class="cd-timeline js-cd-timeline">
+        <div class="cd-timeline__container">
+
+            @foreach (var informacion in Model)
+            {
+                <div class="cd-timeline__block js-cd-block">
+                    <div class="cd-timeline__img cd-timeline__img--picture js-cd-img">
+
+                        <img src="~/assets/plugins/vertical-timeline-master/img/iconmonstr-checkbox-1.svg" />
+                    </div> <!-- cd-timeline__img -->
+                    <div class="cd-timeline__content js-cd-content">
+                        <h2>@informacion.Presentacion_titulo</h2>
+                        @Html.Raw(informacion.Presentacion_descripcion)
+                        @*<a href="#0" class="cd-timeline__read-more">Read more</a>
+                    <span class="cd-timeline__date">Jan 14</span>*@
+                    </div> <!-- cd-timeline__content -->
+                </div> <!-- cd-timeline__block -->
+            }
+        </div>
+    </section> <!-- cd-timeline -->
+</div>
+
+<script src="~/assets/plugins/vertical-timeline-master/js/main.js"></script>

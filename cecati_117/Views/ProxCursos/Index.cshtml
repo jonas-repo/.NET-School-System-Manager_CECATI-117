@@ -1,0 +1,74 @@
+﻿@model IEnumerable<cecati_117.Models.ProximosCursos>
+@{
+    ViewBag.Title = "Proximos cursos";
+    int indice = 0;
+    int count = 0;
+}
+
+
+<style>
+    .slider-img-resp {
+        width: 100%;
+        height: auto;
+        max-height: 125px;
+        object-fit: cover;
+    }
+</style>
+
+<div id="main">
+
+    <!-- Title, Breadcrumb Start-->
+    <div class="breadcrumb-wrapper">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-xs-12 col-sm-6">
+                    <h2 class="title">Proximos cursos</h2>
+                </div>
+                <div class="col-lg-6 col-md-6 col-xs-12 col-sm-6">
+                    <div class="breadcrumbs pull-right">
+                        <ul>
+                            <li>Estas aquí:</li>
+                            <li><a href="@Url.Action("Index","Home")">Inicio</a></li>
+                            <li>Próximos cursos</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Title, Breadcrumb End-->
+    <!-- Main Content start-->
+    <div class="content">
+        <div class="container">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                @while(indice < Model.Count())
+                {
+                    <div class="row">
+                        <div class="portfolio two-column">
+                            @while (count < 3 && indice < Model.Count())
+                            {
+                                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 item">
+                                    <div class="portfolio-item" style="background:none !important;">
+                                        <a href="@Model.ElementAt(indice).ProximosCursos_ImagenURL" target="_blank" class="portfolio-item-link">
+                                            <span class="portfolio-item-hover"></span><span class="fullscreen"><i class="fa fa-search"></i></span>
+                                            <img src="@Model.ElementAt(indice).ProximosCursos_ImagenURL" class="slider-img-resp" />
+                                        </a>
+                                        <div class="portfolio-item-title">
+                                            <a href="@Model.ElementAt(indice).ProximosCursos_ImagenURL" target="_blank">@Model.ElementAt(indice).ProximosCursos_especialidad</a>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </div>
+                                count++;
+                                indice++;
+                            }
+                        </div>
+                    </div>                   
+                    count = 0;
+                }
+            </div>
+        </div>
+    </div>
+    <div class="divider"></div>
+    <!-- Main Content end-->
+</div>

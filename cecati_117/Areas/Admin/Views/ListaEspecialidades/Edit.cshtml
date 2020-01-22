@@ -1,0 +1,107 @@
+﻿@model cecati_117.Models.ListaEspecialidades
+
+@{
+    ViewBag.Title = "Editar especialidad";
+    int id_count = 0;
+}
+<div class="page-title">
+    <div class="title_left">
+        <h2>Editar especialidad @Model.ListaEspecialidades_especialidad</h2>
+    </div>
+</div>
+<div class="clearfix"></div>
+<div class="row">
+    <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">
+               
+                <ul class="nav navbar-right panel_toolbox">
+                    <li>
+                        <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.HiddenFor(model => model.ListaEspecialidades_ID)
+                    <div class="form-horizontal">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.ListaEspecialidades_especialidad, htmlAttributes: new { @class = "control-label col-md-2 col-lg-2 col-sm-2 col-xs-2" })
+                            <div class="col-md-10 col-lg-10 col-sm-12 col-xs-12">
+                                @Html.EditorFor(model => model.ListaEspecialidades_especialidad, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.ListaEspecialidades_especialidad, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <br />
+                        <div class="form-group">
+                            <label class="control-label col-md-2 col-lg-2 col-sm-2 col-xs-2"></label>
+                            <div class="col-md-10 col-lg-10 col-sm-12 col-xs-12">
+                                <table class="table table-striped" id="tabla_listaAprendizaje">
+                                    <thead>
+                                        <tr>
+                                            <th>Lista de cursos</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var tema in Model.Temas)
+                                        {
+                                            
+                                            <tr>
+                                                <td>
+                                                    <input type="text" class="form-control" value="@tema.Tema_nombre" name="temas_editados[@id_count].Tema_nombre" />
+                                                    <input type="hidden" value="@tema.Tema_id" name="temas_editados[@id_count].Tema_id" />
+                                                    <input type="hidden" value="@tema.Especialidad.ListaEspecialidades_ID" name="temas_editados[@id_count].Especialidad.ListaEspecialidades_ID" />
+                                                </td>
+                                                <td>
+                                                    <a type="button" class="btn btn-danger borrar">Eliminar</a>
+                                                </td>
+                                            </tr>
+                                            id_count++;
+                                        }
+                                    </tbody>
+                                </table>
+                                <input type="text" class="form-control" id="input_agregarListaAprendizaje" />
+                                <button type="button" class="btn btn-default" id="botonAgregarListaAprendizaje">Agregar curso</button>
+                            </div>
+                        </div>
+                        <hr />
+                        <br />
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-lg-offset-2 col-md-10 col-lg-10 col-sm-12 col-xs-12">
+                                <input type="submit" value="Guardar" class="btn btn-success" />
+                                <a href="@Url.Action("Index","ListaEspecialidades")" class="btn btn-default">Cancelar</a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script>
+    //*************************** para agregar a la tabla de la lista de aprendizaje
+        $('#botonAgregarListaAprendizaje').click(function () {
+
+            var texto_input_agregarListaAprendizaje = $('#input_agregarListaAprendizaje').val();
+
+
+            $('#tabla_listaAprendizaje > tbody:last-child').append(
+                "<tr>"
+                + "<td><input type='text' class='form-control' value='" + texto_input_agregarListaAprendizaje + "' name='temas_nuevos' /></td>"
+                + "<td> <a type='button' class='btn btn-danger borrar'>Eliminar</a></td>"
+                + "</tr > "
+            );
+            $('#input_agregarListaAprendizaje').val('');
+        });
+
+        $('#tabla_listaAprendizaje').on('click', '.borrar', function () {
+            $(this).closest('tr').remove();
+        });
+        //*****************************
+</script>

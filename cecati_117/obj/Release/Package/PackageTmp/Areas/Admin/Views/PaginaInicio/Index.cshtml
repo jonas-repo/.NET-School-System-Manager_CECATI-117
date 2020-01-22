@@ -1,0 +1,108 @@
+﻿@model IEnumerable<cecati_117.Models.InicioCarrusel_ListaDesplegada>
+
+@{
+    ViewBag.Title = "Página de inicio";
+}
+
+<div class="page-title">
+    <div class="title_left">
+        <h3>Editar inicio</h3>
+    </div>
+</div>
+<div class="clearfix"></div>
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Editar carrusel de imagenes <small>lista de elementos del carrusel</small></h2>
+                <ul class="nav navbar-right panel_toolbox">
+                    <li>
+                        <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+            @if (ViewBag.CambioDeContraseña != null)
+            {
+                <div class="alert alert-info alert-dismissible fade in" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                    <strong>@ViewBag.CambioDeContraseña</strong>
+                </div>
+            }
+
+            <div class="x_content">
+                <br />
+                <a href="@Url.Action("Create", "PaginaInicio")" class="btn btn-success">Agregar a carrusel</a>
+                <br />
+                <table class="table table-hover table-bordered  nowrap myTable" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.InicioCarrusel_Titulo)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.InicioCarrusel_ImagenURL)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.InicioCarrusel_MiniImagenUrl)
+                            </th>
+                            <th>
+                                Lista de aprendizaje
+                            </th>
+                            <th> Opciones </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.InicioCarrusel_Titulo)
+                                </td>
+                                <td>
+                                    <div class="s_container seleccion_simple_default">
+                                        <div class="ssm_opcion">
+                                            <a href="@Html.DisplayTextFor(modelItem => item.InicioCarrusel_ImagenURL)" target="_blank">
+                                                <img src="@Html.DisplayTextFor(modelItem => item.InicioCarrusel_ImagenURL)" class="img-thumbnail img-responsive" />
+                                            </a>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+
+                                    <div class="s_container seleccion_simple_default">
+                                        <div class="ssm_opcion">
+                                            <a href="@Html.DisplayTextFor(modelItem => item.InicioCarrusel_MiniImagenUrl)" target="_blank">
+                                                <img src="@Html.DisplayTextFor(modelItem => item.InicioCarrusel_MiniImagenUrl)" class="img-thumbnail img-responsive" />
+                                            </a>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <ul>
+                                        @foreach (var cadena in item.InicioCarrusel_ListaDeAprendizajes)
+                                        {
+                                            <li>
+                                                @cadena
+                                            </li>
+
+                                        }
+                                    </ul>
+                                </td>
+                                <td>
+                                    <a href="@Url.Action("Edit","PaginaInicio", new { id = item.InicioCarrusel_ID})" class="btn btn-info">Editar</a>
+                                    <a onclick="return confirm('¿Desea eliminar este registro?');" href="@Url.Action("DeleteConfirmed","PaginaInicio", new { id = item.InicioCarrusel_ID})" class="btn btn-danger">Eliminar</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

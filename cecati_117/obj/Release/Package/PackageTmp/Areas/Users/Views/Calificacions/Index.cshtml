@@ -1,0 +1,67 @@
+﻿@model IEnumerable<cecati_117.Models.Grupo>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="clearfix"></div>
+<div class="row">
+    <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Agregar calificaciones a grupo</h2>
+                <ul class="nav navbar-right panel_toolbox">
+                    <li>
+                        <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <table class="table table-hover table-bordered dt-responsive nowrap myTable" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Nombre_grupo)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Turno)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Ciclo_escolar)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Horario)
+                            </th>
+                            <th>Opciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Nombre_grupo)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Turno)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Ciclo_escolar)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Horario)
+                                </td>
+                                <td>
+                                    <a href="@Url.Action("TemasIndex","Calificacions", new { id_grupo = item.Grupo_id})" class="btn btn-success">Calificar</a>
+                                </td>
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

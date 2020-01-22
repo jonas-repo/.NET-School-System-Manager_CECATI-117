@@ -1,0 +1,62 @@
+﻿@model IEnumerable<cecati_117.Models.RequisitosInscripcion>
+
+@{
+    ViewBag.Title = "Indice";
+}
+
+<div class="row">
+    <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Requisitos de inscripción <small>lista de requisitos</small></h2>
+                <ul class="nav navbar-right panel_toolbox">
+                    <li>
+                        <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <br />
+                <a href="@Url.Action("Create", "RequisitosInscripcions")" class="btn btn-success">Agregar un requisito</a>
+                <br />
+                <table class="table table-hover table-bordered dt-responsive nowrap myTable" style="width:100%" >
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.RequisitosInscripcion_titulo)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.RequisitosInscripcion_icono)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.RequisitosInscripcion_descripcion)
+                            </th>
+                            <th>Opciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.RequisitosInscripcion_titulo)
+                                </td>
+                                <td>
+                                    <i class="fa @item.RequisitosInscripcion_icono"></i>
+                                </td>
+                                <td>
+                                    @Html.Raw(item.RequisitosInscripcion_descripcion)
+                                </td>
+                                <td>
+                                    <a href="@Url.Action("Edit","RequisitosInscripcions", new { id = item.RequisitosInscripcion_ID})" class="btn btn-info">Editar</a>
+                                    <a onclick="return confirm('¿Desea eliminar este registro?');" href="@Url.Action("DeleteConfirmed","RequisitosInscripcions", new { id = item.RequisitosInscripcion_ID})" class="btn btn-danger">Eliminar</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>               
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

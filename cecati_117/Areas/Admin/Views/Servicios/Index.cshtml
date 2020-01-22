@@ -1,0 +1,63 @@
+﻿@model IEnumerable<cecati_117.Models.Servicios>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="page-title">
+    <div class="title_left">
+        <h3>Servicios</h3>
+    </div>
+</div>
+<div class="clearfix"></div>
+<div class="row">
+    <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+
+            <div class="x_title">
+                <h2>Lista de Servicios</h2>
+                <ul class="nav navbar-right panel_toolbox">
+                    <li>
+                        <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <br />
+                <a href="@Url.Action("Create", "Servicios")" class="btn btn-success">Agregar un servicio</a>
+                <br />
+                <table class="table table-hover table-bordered dt-responsive nowrap myTable" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Servicios_titulo)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Servicios_descripcion)
+                            </th>
+                            <th>Opciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Servicios_titulo)
+                                </td>
+                                <td>
+                                    @Html.Raw(item.Servicios_descripcion)
+                                </td>
+                                <td>
+                                    <a href="@Url.Action("Edit","Servicios", new { id = item.Servicios_ID })" class="btn btn-info">Editar</a>
+                                    <a onclick="return confirm('¿Desea eliminar este registro?');" href="@Url.Action("DeleteConfirmed","Servicios", new { id =item.Servicios_ID })" class="btn btn-danger">Eliminar</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

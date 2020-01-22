@@ -1,0 +1,46 @@
+﻿@{
+    IEnumerable<cecati_117.Models.Fotos_galeria> fotos_galeria = ViewBag.fotos;
+}
+
+
+@if (ViewBag.nulo == null)
+{
+    if (ViewBag.vacia != true)
+    {
+        foreach (var foto in fotos_galeria)
+        {
+            <div class="col-md-55">
+                <div class="thumbnail">
+                    <div class="image view view-first">
+                        <img style="width: 100%; display: block;" src="@foto.Fotos_galeria_imagenURL" alt="@foto.Fotos_galeria_titulo" />
+                        <div class="mask no-caption">
+                            <div class="tools tools-bottom">
+                                <a href="@foto.Fotos_galeria_imagenURL"  target="_blank"><i class="fa fa-search"></i></a>
+                                @*<a href="#"><i class="fa fa-pencil"></i></a>*@
+                                <a onclick="return confirm('¿Desea eliminar este registro?');" href="@Url.Action("DeleteConfirmed","Fotos_galeria", new { id = foto.Fotos_galeriaID, id_asociado = foto.Id_Galeria.Galeria_ID })"><i class="fa fa-times"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="caption">
+                        <p>
+                            <strong>@foto.Fotos_galeria_titulo</strong>
+                        </p>
+                        <p>@foto.Fotos_galeria_autor</p>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <div class="alert alert-info" role="alert">
+            Actualmente esta galería no contiene ninguna foto
+        </div>
+    }
+}
+else
+{
+    <div class="alert alert-danger" role="alert">
+        Sucedio un error al obtener galeria asociada
+    </div>
+}

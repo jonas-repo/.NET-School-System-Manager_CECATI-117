@@ -1,0 +1,130 @@
+﻿@model IEnumerable<cecati_117.Models.Servicios>
+@{
+    ViewBag.Title = "Servicios de";
+    int contador = 1;
+    string tab = "tab";
+    int contador2 = 1;
+    string content = "content";
+}
+<link rel="stylesheet" href="css/animations.css" media="screen">
+<div id="main">
+    <!-- Title, Breadcrumb Start-->
+    <div class="breadcrumb-wrapper">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-xs-12 col-sm-6">
+                    <h2 class="title">Servicios</h2>
+                </div>
+                <div class="col-lg-6 col-md-6 col-xs-12 col-sm-6">
+                    <div class="breadcrumbs pull-right">
+                        <ul>
+                            <li>Estas aquí:</li>
+                            <li><a href="@Url.Action("Index","Home")">Inicio</a></li>
+                            <li>Servicios</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @* xd *@
+    <div class="content">
+        <div class="container">
+
+
+            @*<div class="divider"></div>*@
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12 ">
+
+                    <!-- Tab Start -->
+                    <h3 class="title">Modalidades de Capacitación</h3>
+                    <p>
+                        La DGCFT ofrece una amplia gama de opciones para la formación para el trabajo,
+                        de acuerdo a las necesidades tanto de quienes acceden a la capacitación formal,
+                        como del sector industrial y de servicio y sus necesidades regionales.
+                        Así, ofrece las siguientes modalidades de capacitación:
+                    </p>
+                    <br />
+                    <div class="widget tabs">
+                        <div id="horizontal-tabs">
+                            <ul class="tabs">
+                                @foreach (var servicio in Model)
+                                {
+                                    if (contador.Equals(1))
+                                    {
+                                        <li id="@tab@contador" class="current"><strong>@servicio.Servicios_titulo</strong></li>
+                                    }
+                                    else
+                                    {
+                                        <li id="@tab@contador"><strong>@servicio.Servicios_titulo</strong></li>
+                                    }
+                                    contador++;
+                                }
+                                @*<li id="tab1" class="current"><strong>Capacitación Formal</strong></li>
+                                <li id="tab2"><strong>Reconocimiento Oficial de la Competencia Ocupacional(ROCO)</strong></li>
+                                <li id="tab3"><strong>Capacitación Acelerada Específica</strong> </li>
+                                <li id="tab4"><strong>Unidades Móviles</strong></li>*@
+                            </ul>
+                            <div class="contents">
+                                @foreach (var descripcion in Model)
+                                {
+                                    <div class="tabscontent" id="@content@contador2" style="display: block;">
+                                        @Html.Raw(descripcion.Servicios_descripcion)
+                                    </div>
+                                    contador2++;
+                                }
+                                @*<div class="tabscontent" id="content1" style="display: block;">
+                                    <p>
+                                        A través de cursos escolarizados que se ofrecen en los CECATI,
+                                        cuyo objetivo esta encaminado a la formación para el trabajo en cumplimiento
+                                        a lo establecido en el artículo 45 de la Ley General de Educación a fin de que sus egresados
+                                        se incorporen al campo ocupacional desempeñando una ocupación u oficio demandados en el mercado.
+                                        El desarrollo curricular de los programas de estudio de la capacitación formal se estructura en dos modalidades metodológicas,
+                                        la primera de ellas basada en criterios de competencia ocupacional,
+                                        y la segunda basada en normas técnicas de competencia laboral emitidas por el Consejo de Normalización y Certificación de Competencia Laboral
+                                        . Constantemente se mantiene la actualización de los programas de estudio a fin de mantenerlos articulados con las necesidades del sector productivo y
+                                        en la medida en que las normas técnicas de competencia laboral sean emitidas para cada una de las especialidades y cursos impartidos en los CECATI.
+                                    </p>
+                                </div>
+                                <div class="tabscontent" id="content2">
+                                    <p>
+                                        Cuando se poseen los conocimientos y habilidades necesarios de una ocupación,
+                                        de manera no escolarizada, se ofrece el servicio de Reconocimiento Oficial de la Competencia Ocupacional (ROCO),
+                                        por el que a través de una evaluación integral, se comprueban los conocimientos del sustentante, y se le otorga en caso de aprobación,
+                                        diploma oficial de dichos conocimientos y habilidades.
+                                    </p>
+                                </div>
+                                <div class="tabscontent" id="content3">
+                                    <p>
+                                        Como un servicio de apoyo a la capacitación en el trabajo,
+                                        se cuenta con la modalidad de Capacitación Acelerada Específica (CAE),
+                                        a través de cursos a trabajadores con necesidades concretas de actualización o especialización.
+                                        Se realiza mediante convenio con empresas o sindicatos.
+                                    </p>
+                                </div>
+                                <div class="tabscontent" id="content4">
+                                    <p>
+                                        Por último, existe la modalidad de capacitación a través de Unidades Móviles,
+                                        esto mediante apoyo con docente  para llevar la capacitación a zonas que así lo requieran.
+                                    </p>
+                                </div>*@
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Tab End -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script>
+        $(document).ready(function () {
+            document.getElementById("footer").style.marginTop = "15em";
+        });
+</script>

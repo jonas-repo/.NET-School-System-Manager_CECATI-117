@@ -1,0 +1,99 @@
+﻿@model IEnumerable<cecati_117.Models.Galeria>
+
+@{
+    ViewBag.Title = "Nuestras galerias de imagenes";
+}
+
+<style>
+    .img {
+        width: 100%;
+        height: auto;
+        max-height: 250px;
+        object-fit: cover;
+    }
+</style>
+
+
+<div id="main">
+    <!-- Title, Breadcrumb Start-->
+    <div class="breadcrumb-wrapper">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-xs-12 col-sm-6">
+                    <h2 class="title">Galerías</h2>
+                </div>
+                <div class="col-lg-6 col-md-6 col-xs-12 col-sm-6">
+                    <div class="breadcrumbs pull-right">
+                        <ul>
+                            <li>Estas aquí:</li>
+                            <li><a href="@Url.Action("Index","Home")">Inicio</a></li>
+                            <li>Galerías</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Title, Breadcrumb End-->
+    <!-- Main Content start-->
+    <div class="content">
+        <div class="container">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="row">
+                    <div class="portfolio two-column">
+                        @foreach (var galeria in Model)
+                        {
+                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 item container" >
+                                <div class="portfolio-item column" style="background:none !important;">
+                                    <a href="@Url.Action("Index","Gallery", new { id = galeria.Galeria_ID })" class="portfolio-item-link">
+                                        <span class="portfolio-item-hover"></span><span class="fullscreen"><i class="fa fa-search"></i></span>
+                                        @if (galeria.Fotos_Galeria.Count() != 0)
+                                        {
+                                            <img class="img" src="@galeria.Fotos_Galeria.FirstOrDefault().Fotos_galeria_imagenURL" @*style="width:100%; height:auto;"*@ />
+                                        }
+                                    </a>
+                                    <div class="portfolio-item-title">
+                                        <a href="@Url.Action("Index","Gallery", new { id = galeria.Galeria_ID })">@galeria.Galeria_titulo</a>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="divider"></div>
+    <div class="divider"></div>
+</div>
+
+@*<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script>
+    //************************************coodigo para que se acomode automaticamente las imagenes
+    ///****************** más informacion https://stackoverflow.com/questions/11688250/setting-equal-heights-for-divs-with-jquery
+    $(document).ready(function () {
+
+        // Select and loop the container element of the elements you want to equalise
+        $('.container').each(function () {
+
+            // Cache the highest
+            var highestBox = 0;
+
+            // Select and loop the elements you want to equalise
+            $('.column', this).each(function () {
+
+                // If this box is higher than the cached highest then store it
+                if ($(this).height() > highestBox) {
+                    highestBox = $(this).height();
+                }
+
+            });
+
+            // Set the height of all those children to whichever was highest
+            $('.column', this).height(highestBox);
+
+        });
+
+    });
+</script>*@

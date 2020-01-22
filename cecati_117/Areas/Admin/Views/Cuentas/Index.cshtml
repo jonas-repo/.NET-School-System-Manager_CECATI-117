@@ -1,0 +1,147 @@
+﻿@model IEnumerable<cecati_117.Areas.Admin.ClasesCompartidas.UsuariosConRoles>
+
+@{
+    ViewBag.Title = "Indice de usuarios";
+    
+}
+
+<div class="row">
+    <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Usuarios</h2>
+                <ul class="nav navbar-right panel_toolbox">
+                    <li>
+                        <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
+                    <div class="x_panel">    
+                        <div class="x_content">
+                            <br />
+                            <a href="@Url.Action("Registro", "Cuentas")" class="btn btn-success">Agregar una cuenta de usuario</a>
+                            <br />
+                            <div class="" role="tabpanel" data-example-id="togglable-tabs">
+                                <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
+                                    <li role="presentation" class="active">
+                                        <a href="#tab_content1" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true">Administradores</a>
+                                    </li>
+                                    <li role="presentation" class="">
+                                        <a href="#tab_content2" role="tab" id="profile-tab" data-toggle="tab" aria-expanded="false">Profesores</a>
+                                    </li>
+                                    <li role="presentation" class="">
+                                        <a href="#tab_content3" role="tab" id="profile-tab2" data-toggle="tab" aria-expanded="false">Alumnos</a>
+                                    </li>
+                                </ul>
+                                <div id="myTabContent" class="tab-content">
+                                    <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="home-tab">
+                                        <table class="table table-hover table-bordered dt-responsive nowrap myTable" style="width:100%">
+                                            <thead>
+                                                <tr>
+                                                    <th>
+                                                        @Html.DisplayNameFor(model => model.Email)
+                                                    </th>
+                                                    <th>
+                                                        @Html.DisplayNameFor(model => model.Username)
+                                                    </th>
+
+                                                    <th>Opciones</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (var item in Model.Where(x => x.Role.Equals("Admin")))
+                                                {
+                                                    <tr>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.Email)
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.Username)
+                                                        </td>
+                                                        <td>
+                                                            <a href="@Url.Action("EditarRegistro","Cuentas", new { id_usuario = item.UserId})" class="btn btn-info">Editar</a>
+                                                            <a onclick="return confirm('¿Desea eliminar este registro?');" href="@Url.Action("BorrarUsuario","Cuentas", new { id = item.UserId})" class="btn btn-danger">Eliminar</a>
+                                                        </td>
+                                                    </tr>
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div role="tabpanel" class="tab-pane fade" id="tab_content2" aria-labelledby="profile-tab">
+                                        <table class="table table-hover table-bordered dt-responsive nowrap myTable" style="width:100%" >
+                                            <thead>
+                                                <tr>
+                                                    <th>
+                                                        @Html.DisplayNameFor(model => model.Email)
+                                                    </th>
+                                                    <th>
+                                                        @Html.DisplayNameFor(model => model.Username)
+                                                    </th>
+
+                                                    <th>Opciones</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (var item in Model.Where(x => x.Role.Equals("Maestro")))
+                                                {
+                                                    <tr>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.Email)
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.Username)
+                                                        </td>
+                                                        <td>
+                                                            <a href="@Url.Action("EditarRegistro","Cuentas", new { id_usuario = item.UserId})" class="btn btn-info">Editar</a>
+                                                            <a onclick="return confirm('¿Desea eliminar este registro?');" href="@Url.Action("BorrarUsuario","Cuentas", new { id = item.UserId})" class="btn btn-danger">Eliminar</a>
+                                                        </td>
+                                                    </tr>
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div role="tabpanel" class="tab-pane fade" id="tab_content3" aria-labelledby="profile-tab">
+                                        <table class="table table-hover table-bordered dt-responsive nowrap myTable" style="width:100%">
+                                            <thead>
+                                                <tr>
+                                                    <th>
+                                                        @Html.DisplayNameFor(model => model.Email)
+                                                    </th>
+                                                    <th>
+                                                        @Html.DisplayNameFor(model => model.Username)
+                                                    </th>
+
+                                                    <th>Opciones</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (var item in Model.Where(x => x.Role.Equals("Alumno")))
+                                                {
+                                                    <tr>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.Email)
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.Username)
+                                                        </td>
+                                                        <td>
+                                                            <a href="@Url.Action("EditarRegistro","Cuentas", new { id_usuario = item.UserId})" class="btn btn-info">Editar</a>
+                                                            <a onclick="return confirm('¿Desea eliminar este registro?');" href="@Url.Action("BorrarUsuario","Cuentas", new { id = item.UserId})" class="btn btn-danger">Eliminar</a>
+                                                        </td>
+                                                    </tr>
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>                             
+            </div>
+        </div>
+    </div>
+</div>

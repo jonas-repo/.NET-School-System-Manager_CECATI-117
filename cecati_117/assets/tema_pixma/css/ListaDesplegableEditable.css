@@ -1,0 +1,21 @@
+﻿/*.dropdown {
+    position: relative;
+    width: 200px;
+}
+
+    .dropdown select {
+        width: 100%;
+    }
+
+    .dropdown > * {
+        box-sizing: border-box;
+        height: 1.5em;
+    }
+
+    .dropdown select {
+    }
+
+    .dropdown input {
+        position: absolute;
+        width: calc(100% - 20px);
+    }*/

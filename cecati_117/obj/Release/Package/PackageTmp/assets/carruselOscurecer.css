@@ -1,0 +1,8 @@
+﻿.filtro-oscurecer {
+    filter: brightness(0.4);
+    -webkit-filter: brightness(0.4);
+}
+.filtro-original {
+    filter: brightness(1) !important;
+    -webkit-filter: brightness(1) !important;
+}

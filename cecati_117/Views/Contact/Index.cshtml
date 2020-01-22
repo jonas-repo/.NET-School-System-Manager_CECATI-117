@@ -1,0 +1,170 @@
+﻿
+@{
+    ViewBag.Title = "Contacta con nosotros - ";
+}
+
+<!-- Content Start -->
+<div id="main">
+
+    <!-- Title, Breadcrumb Start-->
+    <div class="breadcrumb-wrapper">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-xs-12 col-sm-6">
+                    <h2 class="title">Contacto</h2>
+                </div>
+                <div class="col-lg-6 col-md-6 col-xs-12 col-sm-6">
+                    <div class="breadcrumbs pull-right">
+                        <ul>
+                            <li>Estás aquí:</li>
+                            <li><a href="@Url.Action("Index","Home")">Inicio</a></li>
+                            <li>Contacto</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Title, Breadcrumb End-->
+    <!-- Main Content start-->
+    <div class="content">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <h3 class="title">Nuestra ubicación</h3>
+                    <div id="maps" class="google-maps">
+                    </div>
+                    <!-- Left Section End -->
+                </div>
+            </div>
+            <div class="divider"></div>
+
+            <div class="row">
+                @*<div class="col-lg-8 col-md-8 col-sm-6 col-xs-12" id="contact-form">
+                    <h3 class="title">Envíanos un mensaje</h3>
+                    <p>
+                        Puedes contactarnos a través de un mensaje directamente desde está página.
+                    </p>
+                    <p>
+                        Por favor se paciente solemos responder en la brevedad posible.
+                    </p>
+                    <div class="divider"></div>
+                    <form method="post" class="reply" id="contact">
+                        <fieldset>
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                    <label>Nombre: <span>*</span></label>
+                                    <input class="form-control" id="name" name="name" type="text" value="" required>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                    <label>Email: <span>*</span></label>
+                                    <input class="form-control" type="email" id="email" name="email" value="" required>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <label>Asunto: <span>*</span></label>
+                                    <input class="form-control" id="subject" name="subject" type="text" value="" required>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <label>Mensaje: <span>*</span></label>
+                                    <textarea class="form-control" id="text" name="text" rows="3" cols="40" required></textarea>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <button class="btn-normal btn-color submit  bottom-pad" type="submit">Enviar</button>
+                        <div class="success alert-success alert" style="display:none">Tu mensaje a sido enviado correctamente.</div>
+                        <div class="error alert-error alert" style="display:none">El E-mail debe ser valido y el mensaje debe ser mayor a 100 caracteres.</div>
+                        <div class="clearfix">
+                        </div>
+                    </form>
+                </div>*@
+                <div class="col-lg-12 col-md-12 col-xs-12 col-sm-6">
+                    <div class="address widget">
+                        <h3 class="title">Nuestras instalaciones</h3>
+                        <ul class="contact-us">
+                            <li>
+                                <i class="fa fa-map-marker"></i>
+                                <p>
+                                    <strong class="contact-pad">Domicilio:</strong> Hermanos Flores Magón S/N<br>  Col. Ampliación Revolución <br>
+                                    Uruapan, Michoacán.
+                                </p>
+                            </li>
+                            <li>
+                                <i class="fa fa-phone"></i>
+                                <p>
+                                    <strong>Telefono:</strong> (452) 52-8-10-68
+                                </p>
+                            </li>
+                            <li>
+                                <strong>Correos Electrónicos</strong>
+                                <br />
+                                <i class="fa fa-envelope"></i>
+                                <p>
+                                    <strong>Dirección:</strong><a href="mailto:cecati117.dir@dgcft.sems.gob.mx"> cecati117.dir@dgcft.sems.gob.mx</a>
+                                </p>
+                                <i class="fa fa-envelope"></i>
+                                <p>
+                                    <strong>Capacitación:</strong><a href="mailto:cecati117.cap@dgcft.sems.gob.mx">cecati117.cap@dgcft.sems.gob.mx</a>
+                                </p>
+                                <i class="fa fa-envelope"></i>
+                                <p>
+                                    <strong>Vinculación:</strong><a href="mailto:cecati117.vinc@dgcft.sems.gob.mx">cecati117.vinc@dgcft.sems.gob.mx</a>
+                                </p>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="contact-info widget">
+                        <h3 class="title">Horarios</h3>
+                        <ul class="business-hour">
+                            <li><i class="fa fa-clock-o"> </i>Lunes a Viernes de 8:00 am a 8:00 pm </li>
+                            <li><i class="fa fa-clock-o"> </i>Sábado de 9:00 am a 2:00 pm</li>
+                            <li><i class="fa fa-times-circle-o"> </i>Domingo - Cerrado</li>
+                        </ul>
+                    </div>
+                    <div class="follow widget">
+                        <h3 class="title">Siguenos en nuestras redes sociales</h3>
+                        <div class="member-social dark">                           
+                            <a class="facebook" href="https://www.facebook.com/cecati.uruapan.75?lst=100001220432490%3A100024382057638%3A1532997053" target="_blank"><i class="fa fa-facebook"></i></a>
+                            <a class="linkedin" href="https://www.linkedin.com/company/cecati-117/" target="_blank"><i class="fa fa-linkedin"></i></a>
+                            @*<a class="twitter" href="#"><i class="fa fa-twitter"></i></a>
+        <a class="dribbble" href="#"><i class="fa fa-dribbble"></i></a>
+        <a class="gplus" href="#"><i class="fa fa-google-plus"></i></a>
+        <a class="linkedin" href="#"><i class="fa fa-linkedin"></i></a>*@
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!-- Main Content end-->
+</div>
+<!-- Content End -->
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDb1lMnlASUsVRfkbQLH_h615d1nkq-hek&callback=initMap">
+</script>
+<script>
+    function initMap() {
+        var myLatLng = { lat: 19.406531, lng: -102.043095 };
+
+        var map = new google.maps.Map(document.getElementById('maps'), {
+            zoom: 18,
+            center: myLatLng
+        });
+
+        var marker = new google.maps.Marker({
+            position: myLatLng,
+            map: map,
+            title: 'CECATI 117'
+        });
+    }
+</script>
+
+
+
+<!-- The Scripts -->
+

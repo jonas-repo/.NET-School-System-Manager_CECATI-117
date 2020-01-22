@@ -1,0 +1,58 @@
+﻿@model IEnumerable<cecati_117.Models.Galeria>
+
+@{
+    ViewBag.Title = "Indice Galerias";
+}
+
+<div class="page-title">
+    <div class="title_left">
+
+    </div>
+</div>
+<div class="clearfix"></div>
+<div class="row">
+    <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Editar lista de galerias</h2>
+                <ul class="nav navbar-right panel_toolbox">
+                    <li>
+                        <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <br />
+                <a href="@Url.Action("Create", "Galerias")" class="btn btn-success">Agregar una Galeria</a>
+                <br />
+
+                <table class="table table-hover table-bordered dt-responsive nowrap myTable" style="width:100%" ">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Galeria_titulo)
+                            </th>
+                            <th>Opciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Galeria_titulo)
+                                </td>
+                                <td>
+                                    <a href="@Url.Action("Create","Fotos_galeria", new { id = item.Galeria_ID})" class="btn btn-success">Imagenes de esta galería </a>
+                                    <a href="@Url.Action("Edit","Galerias", new { id = item.Galeria_ID})" class="btn btn-info">Editar nombre de galeria</a>
+                                    <a onclick="return confirm('¿Desea eliminar este registro?');" href="@Url.Action("DeleteConfirmed","Galerias", new { id = item.Galeria_ID})" class="btn btn-danger">Eliminar</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>                 
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

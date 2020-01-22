@@ -1,0 +1,144 @@
+﻿@model IEnumerable<cecati_117.Models.EspecialidadDetalles>
+
+<style>
+    .slider-img-resp {
+        width: 100%;
+        height: auto;
+        max-height: 125px;
+        object-fit: cover;
+    }
+</style>
+
+
+
+<div class="recentworks bottom-pad" style="background:none !important; border-bottom:none !important; border-top:none !important;">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                <div class="portfolio-desc">
+                    <h3 class="title">Más Especialidades</h3>
+                    <p>
+                        Hecha un vistazo a nuestras otras páginas y especialidades seguro que tenemos una especialmente para tí.
+                        <br />
+                        ¡Preparate para tu mejor futuro con nosotros!
+                    </p>
+                    <div class="carousel-controls">
+                        <a class="prev" href="#portfolio-carousel" data-slide="prev"><i class="fa fa-angle-left"></i></a>
+                        <a class="next" href="#portfolio-carousel" data-slide="next"><i class="fa fa-angle-right"></i></a>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-9 col-md-9 col-xs-12">
+                <div class="row">
+                    <div id="portfolio-carousel" class="client-carousel slide">
+                        <div class="carousel-inner">
+                            @{
+                                int contador = 0;
+                                int inicio_contador = contador;
+                                int modelos = Model.Count();
+                                while (contador < modelos)
+                                {
+                                    if (contador.Equals(0))
+                                    {
+                                        <div class="item active">
+                                            @while (contador < 3)
+                                            {
+                                                if (contador >= modelos)
+                                                {
+                                                    break;
+                                                }
+                                                else
+                                                {
+                                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 item container">
+                                                        <div class="portfolio-item column"  style="background:none !important;">
+                                                            <a href="@Url.Action("Index","Especialidades_Paginas", new { id = Model.ElementAt(contador).EspecialidadDetalles_ID })" class="portfolio-item-link">
+                                                                <span class="portfolio-item-hover"></span><span class="fullscreen"><i class="fa fa-search"></i></span>
+                                                                <img src="@Model.ElementAt(contador).EspecialidadDetalles_Imagen"  class="slider-img-resp" />
+                                                            </a>
+                                                            <div class="portfolio-item-title">
+                                                                <a href="@Url.Action("Index","Especialidades_Paginas", new { id = Model.ElementAt(contador).EspecialidadDetalles_ID })">@Model.ElementAt(contador).Id_Especialidad.ListaEspecialidades_especialidad</a>
+                                                                <p>
+                                                                    @Model.ElementAt(contador).EspecialidadDetalles_titulo
+                                                                </p>
+                                                            </div>
+                                                            <div class="clearfix"></div>
+                                                        </div>
+                                                    </div>
+                                                    contador++;
+                                                }
+
+                                            }
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="item">
+                                            @while (contador < inicio_contador + 3)
+                                            {
+                                                if (contador >= modelos)
+                                                {
+                                                    break;
+                                                }
+                                                else
+                                                {
+                                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 item container">
+                                                        <div class="portfolio-item column" style="background:none !important;">
+                                                            <a href="@Url.Action("Index","Especialidades_Paginas", new { id = Model.ElementAt(contador).EspecialidadDetalles_ID })" class="portfolio-item-link">
+                                                                <span class="portfolio-item-hover"></span><span class="fullscreen"><i class="fa fa-search"></i></span>
+                                                                <img src="@Model.ElementAt(contador).EspecialidadDetalles_Imagen"  class="slider-img-resp" />
+                                                            </a>
+                                                            <div class="portfolio-item-title">
+                                                                <a href="@Url.Action("Index","Especialidades_Paginas", new { id = Model.ElementAt(contador).EspecialidadDetalles_ID })">@Model.ElementAt(contador).Id_Especialidad.ListaEspecialidades_especialidad</a>
+                                                                <p>
+                                                                    @Model.ElementAt(contador).EspecialidadDetalles_titulo
+                                                                </p>
+                                                            </div>
+                                                            <div class="clearfix"></div>
+                                                        </div>
+                                                    </div>
+                                                    contador++;
+                                                }
+                                            }
+                                        </div>
+                                    }
+                                    inicio_contador = contador;
+                                }
+                            }
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@*<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script>
+    //************************************coodigo para que se acomode automaticamente las imagenes
+    ///****************** más informacion https://stackoverflow.com/questions/11688250/setting-equal-heights-for-divs-with-jquery
+    $(document).ready(function () {
+
+        // Select and loop the container element of the elements you want to equalise
+        $('.container').each(function () {
+
+            // Cache the highest
+            var highestBox = 0;
+
+            // Select and loop the elements you want to equalise
+            $('.column', this).each(function () {
+
+                // If this box is higher than the cached highest then store it
+                if ($(this).height() > highestBox) {
+                    highestBox = $(this).height();
+                }
+
+            });
+
+            // Set the height of all those children to whichever was highest
+            $('.column', this).height(highestBox);
+
+        });
+
+    });
+</script>*@

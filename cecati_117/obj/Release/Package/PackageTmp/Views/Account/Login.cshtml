@@ -1,0 +1,97 @@
+﻿@using cecati_117.Models
+@model LoginViewModel
+@{
+
+    ViewBag.Title = "Iniciar sesión en - ";
+
+}
+
+@*<h2>@ViewBag.Title.</h2>*@
+<div class="row">
+    <div class="breadcrumb-wrapper">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-2 col-xs-12 col-sm-6" style="margin-top:2%;">                
+                </div>
+                <div class="col-lg-6 col-md-6 col-xs-12 col-sm-6">
+                    <div class="breadcrumbs pull-right">
+                        <ul>
+                            <li>Estás aquí:</li>
+                            <li><a href="@Url.Action("Index","Home")">Inicio</a></li>
+                            <li>Iniciar sesión</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @*<div class="col-md-4">*@
+  
+        <div class="col-lg-6 col-md-6 col-md-offset-3 col-lg-offset-3 col-xs-offset-0  col-sm-offset-0">
+            <br />
+            <section id="loginForm" class="thumbnail">
+                @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                {
+                    @Html.AntiForgeryToken()
+
+
+                    <br />
+                    <h2 style="text-align:center;">Inicio de sesión</h2>
+                    <hr />
+
+
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                    <br />
+                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                    <br />
+                    <br />
+                    <div class="input-group col-md-8 col-md-offset-2">
+
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+
+                        <input id="email" type="text" class="form-control" name="email" placeholder="Correo electrónico">
+
+                    </div>
+
+                    <br />
+                    <div class="input-group col-md-8 col-md-offset-2">
+
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+
+                        <input id="password" type="password" class="form-control" name="password" placeholder="Contraseña">
+
+                    </div>
+
+
+                    <div class="form-group">
+                        <br />
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Iniciar sesión" class="btn btn-success" />
+                        </div>
+                    </div>
+                    <p class="col-md-offset-2">
+                        @Html.ActionLink("Registrarse como alumno", "Register")
+
+                    </p>
+                    <p class="col-md-offset-2">
+                        @Html.ActionLink("¿Has olvidado tu contraseña?", "ForgotPassword")
+                    </p>
+                    //Habilite esta opción después de habilitar la confirmación de la cuenta para la función de restablecimiento de contraseña
+
+                }
+            </section>
+        </div>
+
+    </div>
+
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            document.getElementById("footer").style.marginTop = "15em";
+        });
+    </script>
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }

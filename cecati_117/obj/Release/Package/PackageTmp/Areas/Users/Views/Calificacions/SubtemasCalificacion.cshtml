@@ -1,0 +1,116 @@
+﻿
+@{
+    ViewBag.Title = "Subtemas Calificacion";
+    cecati_117.Models.Grupo grupo = ViewBag.grupo;
+    cecati_117.Models.Subtema Subtema = ViewBag.subtema;
+    ICollection<cecati_117.Models.Calificados> calificados = ViewBag.calificados;
+    ICollection<cecati_117.Models.Calificados> noCalificados = ViewBag.NoCalificados;
+    int count = 0;
+    int count2 = 0;
+}
+
+<div class="clearfix"></div>
+<div class="row">
+    <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Subtema @Subtema.Subtema_nombre de grupo: @grupo.Nombre_grupo</h2>
+                <ul class="nav navbar-right panel_toolbox">
+                    <li>
+                        <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                @if (ViewBag.NoSubtemas != null)
+                {
+                    <div class="alert alert-info" role="alert">
+                        @ViewBag.NoSubtemas
+                    </div>
+                    <a href="@Url.Action("TemasIndex","Calificacions", new {id_grupo = grupo.Grupo_id})" class="btn btn-default">Volver</a>
+                }
+                else
+                {
+                    using (Html.BeginForm("CalificacionRegister", "Calificacions", FormMethod.Post))
+                    {
+                        <input type="submit" value="Guardar" class="btn btn-success" />
+                        <a href="@Url.Action("TemasIndex","Calificacions", new {id_grupo = grupo.Grupo_id})" class="btn btn-default">Volver</a>
+                        <input type="text" value="@grupo.Grupo_id" hidden name="grupo" />
+                        <input type="text" value="@Subtema.Subtema_id" hidden name="subtema" />
+                        <br />
+                        <br />
+                        <table class="table table-hover table-bordered dt-responsive nowrap myTable" style="width:50%">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        Numero de control de Alumno
+                                    </th>
+                                    <th>
+                                        Nombre del Alumno
+                                    </th>
+                                    <th>
+                                        Calificacion de @Subtema.Subtema_nombre
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (calificados != null)
+                                {
+                                    foreach (var calificado in calificados)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @calificado.Persona.Numero_control
+                                            </td>
+                                            <td>
+                                                @calificado.Persona.Nombre @calificado.Persona.Apellido_paterno @calificado.Persona.Apellido_materno
+                                            </td>
+                                            <td>
+                                                <input type="text" name="calificados[@count].Calificacion_total" value="@calificado.Calificacion.Calificacion_total" class="form-control calificados[@count].Calificacion_total" placeholder="Calificación"  oninput="changeValue(this)"/>
+                                                <input type="text" hidden value="@calificado.Subtema.Subtema_id" name="calificados[@count].Subtema.Subtema_id" />
+                                                <input type="text" hidden value="@calificado.Persona.Persona_id" name="calificados[@count].Alumno.Persona_id" />
+                                                <input type="text" hidden value="@calificado.Calificacion.Calificacion_id" name="calificados[@count].Calificacion_id" />
+                                            </td>
+                                        </tr>
+                                        count++;
+                                    }
+
+
+                                }
+                                @if (noCalificados != null)
+                                {
+                                    foreach (var nocalificado in noCalificados)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @nocalificado.Persona.Numero_control
+                                            </td>
+                                            <td>
+                                                @nocalificado.Persona.Nombre @nocalificado.Persona.Apellido_paterno @nocalificado.Persona.Apellido_materno
+                                            </td>
+                                            <td>
+                                                <input type="text" name="noCalificados[@count2].Calificacion_total" class="form-control noCalificados[@count2].Calificacion_total" placeholder="Calificación" oninput="changeValue(this)"/>
+                                                <input type="text" hidden value="@nocalificado.Subtema.Subtema_id" name="noCalificados[@count2].Subtema.Subtema_id" />
+                                                <input type="text" hidden value="@nocalificado.Persona.Persona_id" name="noCalificados[@count2].Alumno.Persona_id" />
+                                            </td>
+                                        </tr>
+                                        count2++;
+                                    }
+                                }
+
+                            </tbody>
+                        </table>
+                    }
+
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function changeValue(e) {
+        document.getElementsByClassName(e.name)[0].setAttribute("value", e.value);
+    };
+</script>

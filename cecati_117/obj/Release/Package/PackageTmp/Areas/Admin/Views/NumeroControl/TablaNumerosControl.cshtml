@@ -1,0 +1,27 @@
+﻿@model IEnumerable<cecati_117.Models.Persona>
+
+
+
+
+@foreach (var item in Model) {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.Numero_control)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Nombre)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Apellido_paterno)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Apellido_materno)
+    </td>
+    <td>
+        <a href="@Url.Action("Edit","NumeroControl", new { id = item.Persona_id  })" class="btn btn-info">Editar</a>
+        <a onclick="return confirm('¿Desea eliminar este registro?');" href="@Url.Action("DeleteConfirmed","NumeroControl", new { id = item.Persona_id })" class="btn btn-danger">Eliminar</a>
+    </td>
+</tr>
+}
+
+

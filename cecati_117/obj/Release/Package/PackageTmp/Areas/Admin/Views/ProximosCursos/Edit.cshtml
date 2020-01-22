@@ -1,0 +1,112 @@
+﻿@model cecati_117.Models.ProximosCursos
+
+@{
+    ViewBag.Title = "Edit";
+    IEnumerable<cecati_117.Models.ListaEspecialidades> listaEspecialidades = ViewBag.especialidades;
+}
+
+
+<div class="page-title">
+    <div class="title_left">
+        <h3>Proximos cursos</h3>
+    </div>
+</div>
+<div class="clearfix"></div>
+<div class="row">
+    <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Editar proximos cursos</h2>
+                <ul class="nav navbar-right panel_toolbox">
+                    <li>
+                        <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <br />
+                @if (ViewBag.NoEsImagen != null)
+                {
+                    <div class="alert alert-danger" role="alert">
+                        @ViewBag.NoEsImagen
+                    </div>
+                }
+                @using (Html.BeginForm("Edit", "ProximosCursos", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-horizontal">
+
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        @Html.HiddenFor(model => model.ProximosCursos_ID)
+                        @Html.HiddenFor(model => model.ProximosCursos_ImagenURL)
+                        @Html.HiddenFor(model => model.ProximosCursos_fecha)
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.ProximosCursos_especialidad, htmlAttributes: new { @class = "col-md-2 col-lg-2 col-sm-12 col-xs-12" })
+                            <div class="form-group-sm col-md-10 col-lg-10 col-sm-12 col-xs-12">
+                                <input type="text" class="form-control" name="especialidad" value="@Model.ProximosCursos_especialidad">
+                                <select onchange="this.previousElementSibling.value=this.value; this.previousElementSibling.focus()" class="form-control">
+                                    <option selected disabled>Escoger especialidad</option>
+                                    @foreach (var especialidad in listaEspecialidades)
+                                    {
+                                        <option>@especialidad.ListaEspecialidades_especialidad</option>
+                                    }
+                                </select>
+                                @Html.ValidationMessageFor(model => model.ProximosCursos_especialidad, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.ProximosCursos_ImagenURL, htmlAttributes: new { @class = "control-label col-md-2 col-lg-2 col-sm-12 col-xs-12" })
+                            <div class="col-md-10 col-lg-10 col-sm-12 col-xs-12">
+                                <div class="col-md-55">
+                                    <div class="thumbnail">
+                                        <div class="image view view-first">
+                                            <img style="width: 100%; display: block;" src="@Model.ProximosCursos_ImagenURL" alt="imagen" id="image_upload_preview" />
+                                        </div>
+                                        <div class="caption">
+                                            <input id="InputFile" type="file" class="form-control" name="imagen" />
+                                        </div>
+                                    </div>
+                                </div>
+                                @*@Html.EditorFor(model => model.ProximosCursos_ImagenURL, new { htmlAttributes = new { @class = "form-control" } })*@
+                                @Html.ValidationMessageFor(model => model.ProximosCursos_ImagenURL, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+
+                        <div class="ln_solid"></div>
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-lg-offset-2 col-md-12 col-lg-12 col-sm-12 col-xs-12">
+                                <input type="submit" value="Guardar" class="btn btn-success" />
+                                <a href="@Url.Action("Index","ProximosCursos")" class="btn btn-default">Cancelar</a>
+                            </div>
+                        </div>
+
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script>
+    //*************************** para previsualizar una imagen antes de cargarla a la base de datos
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#image_upload_preview').attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    $("#InputFile").change(function () {
+        readURL(this);
+    });
+    //*******************************************************************************************************
+</script>
